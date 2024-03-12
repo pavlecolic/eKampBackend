@@ -6,22 +6,17 @@ import org.unibl.etf.ekamp.base.BaseEntity;
 
 import java.util.List;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 @Entity
 @Table(name = "resident")
-public class ResidentEntity implements BaseEntity<Integer> {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Id
-    @Column(name = "person_id", nullable = false)
-    private Integer id;
+@PrimaryKeyJoinColumn(name = "person_id")
+public class ResidentEntity extends PersonEntity implements BaseEntity<Integer> {
     @Basic
     @Column(name = "needs_hospitalisation", nullable = true)
     private Boolean needsHospitalisation;
     @OneToMany(mappedBy = "resident")
     private List<ResidencePeriodEntity> residencePeriods;
-    @OneToOne
-    @JoinColumn(name = "person_id", referencedColumnName = "id", nullable = false)
-    private PersonEntity person;
     @ManyToOne
     @JoinColumn(name = "employee_person_id", referencedColumnName = "person_id", nullable = false)
     private EmployeeEntity employee;

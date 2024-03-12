@@ -12,6 +12,7 @@ import java.sql.Date;
 @Table(name = "person")
 public class PersonEntity implements BaseEntity<Integer> {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
     @Basic
@@ -32,7 +33,5 @@ public class PersonEntity implements BaseEntity<Integer> {
     @ManyToOne
     @JoinColumn(name = "country_id", referencedColumnName = "id", nullable = false)
     private CountryEntity country;
-    @OneToOne(mappedBy = "person")
-    private ResidentEntity resident;
 
 }
