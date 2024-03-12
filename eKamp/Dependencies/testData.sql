@@ -22,8 +22,6 @@ INSERT INTO `eKamp`.`place` (`description`, `municipility_id`) VALUES ('Buckingh
 
 -- Employee
 INSERT INTO `eKamp`.`employee` (`Person_id`, `username`, `password`, `is_admin`) VALUES (1, 'johndoe', 'password123', 1);
-INSERT INTO `eKamp`.`employee` (`Person_id`, `username`, `password`, `is_admin`) VALUES (2, 'janesmith', 'pass1234', 0);
-INSERT INTO `eKamp`.`employee` (`Person_id`, `username`, `password`, `is_admin`) VALUES (3, 'mjohnson', 'securepass', 0);
 
 -- Camp Status
 INSERT INTO `eKamp`.`camp_status` (`name`) VALUES ('Open');
@@ -37,15 +35,12 @@ INSERT INTO `eKamp`.`camp` (`name`, `place_id`, `camp_status_id`, `capacity`) VA
 
 -- Assignment
 INSERT INTO `eKamp`.`assignment` (`start_date`, `end_date`, `employee_person_id`, `camp_id`) VALUES ('2024-06-01', '2024-08-31', 1, 1);
-INSERT INTO `eKamp`.`assignment` (`start_date`, `end_date`, `employee_person_id`, `camp_id`) VALUES ('2024-12-20', '2025-01-05', 2, 2);
-INSERT INTO `eKamp`.`assignment` (`start_date`, `end_date`, `employee_person_id`, `camp_id`) VALUES ('2024-03-15', '2024-03-20', 3, 3);
 
 -- Resident
-INSERT INTO `eKamp`.`resident` (`person_id`, `needs_hospitalisation`, `employee_person_id`) VALUES (1, 0, 1);
-INSERT INTO `eKamp`.`resident` (`person_id`, `needs_hospitalisation`, `employee_person_id`) VALUES (2, 1, 2);
-INSERT INTO `eKamp`.`resident` (`person_id`, `needs_hospitalisation`, `employee_person_id`) VALUES (3, 0, 3);
+INSERT INTO `eKamp`.`resident` (`person_id`, `needs_hospitalisation`, `employee_person_id`) VALUES (2, 1, 1);
+INSERT INTO `eKamp`.`resident` (`person_id`, `needs_hospitalisation`, `employee_person_id`) VALUES (3, 0, 1);
 
 -- Residence Period
-INSERT INTO `eKamp`.`residence_period` (`start_date`, `end_date`, `camp_id`, `resident_person_id`) VALUES ('2024-06-01 09:00:00', '2024-08-31 18:00:00', 1, 1);
-INSERT INTO `eKamp`.`residence_period` (`start_date`, `end_date`, `camp_id`, `resident_person_id`) VALUES ('2024-12-20 10:00:00', '2025-01-05 15:00:00', 2, 2);
-INSERT INTO `eKamp`.`residence_period` (`start_date`, `end_date`, `camp_id`, `resident_person_id`) VALUES ('2024-03-15 12:00:00', '2024-03-20 12:00:00', 3, 3);
+INSERT INTO `eKamp`.`residence_period` (`start_date`, `end_date`, `camp_id`, `resident_person_id`) VALUES ('2024-06-01 09:00:00', '2024-08-31 18:00:00', 1, 2);
+INSERT INTO `eKamp`.`residence_period` (`start_date`, `end_date`, `camp_id`, `resident_person_id`) VALUES ('2024-12-20 10:00:00', '2025-01-05 15:00:00', 2, 3);
+
