@@ -8,12 +8,11 @@ import org.unibl.etf.ekamp.model.entities.ResidentEntity;
 
 import java.util.List;
 @Data
-public class Employee {
+public class Employee extends Person{
 
-
-    private Integer id;
     private String password;
     private String username;
+
    /* private Boolean isAdmin;
     private List<AssignmentEntity> assignments;
     private PersonEntity person;
