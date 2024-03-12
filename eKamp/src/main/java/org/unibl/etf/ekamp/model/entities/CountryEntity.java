@@ -1,5 +1,6 @@
 package org.unibl.etf.ekamp.model.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import org.unibl.etf.ekamp.base.BaseEntity;
@@ -18,8 +19,10 @@ public class CountryEntity implements BaseEntity<Integer> {
     @Column(name = "name", nullable = false, length = 45)
     private String name;
     @OneToMany(mappedBy = "country")
+    @JsonIgnore
     private List<MunicipilityEntity> municipilities;
     @OneToMany(mappedBy = "country")
+    @JsonIgnore
     private List<PersonEntity> people;
 
 }
