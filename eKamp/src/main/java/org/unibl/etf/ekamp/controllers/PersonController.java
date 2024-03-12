@@ -9,7 +9,7 @@ import org.unibl.etf.ekamp.model.PersonRequest;
 import org.unibl.etf.ekamp.services.PersonService;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/persons")
 public class PersonController extends CrudController<Integer, PersonRequest, Person> {
 
     protected PersonController(PersonService crudService) {
