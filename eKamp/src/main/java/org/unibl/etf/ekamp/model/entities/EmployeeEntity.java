@@ -10,10 +10,9 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "employee")
+@PrimaryKeyJoinColumn(name = "person_id")
 public class EmployeeEntity extends PersonEntity implements BaseEntity<Integer> {
-    @Id
-    @Column(name = "person_id", nullable = false)
-    private Integer id;
+
     @Basic
     @Column(name = "username", nullable = false, length = 45)
     private String username;
