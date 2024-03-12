@@ -8,6 +8,7 @@ import java.sql.Date;
 
 @Data
 @Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Table(name = "person")
 public class PersonEntity implements BaseEntity<Integer> {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,12 +30,12 @@ public class PersonEntity implements BaseEntity<Integer> {
     @Basic
     @Column(name = "jmbg", nullable = true, length = 13)
     private String jmbg;
-//    @OneToOne(mappedBy = "person")
-//    private EmployeeEntity employee;
+    @OneToOne(mappedBy = "person")
+    private EmployeeEntity employee;
     @ManyToOne
     @JoinColumn(name = "country_id", referencedColumnName = "id", nullable = false)
     private CountryEntity country;
-//    @OneToOne(mappedBy = "person")
-//    private ResidentEntity resident;
+    @OneToOne(mappedBy = "person")
+    private ResidentEntity resident;
 
 }

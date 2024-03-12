@@ -6,13 +6,13 @@ import org.unibl.etf.ekamp.base.BaseEntity;
 
 import java.util.List;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 @Entity
 @Table(name = "employee")
-public class EmployeeEntity implements BaseEntity<Integer> {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class EmployeeEntity extends PersonEntity implements BaseEntity<Integer> {
     @Id
-    @Column(name = "Person_id", nullable = false)
+    @Column(name = "person_id", nullable = false)
     private Integer id;
     @Basic
     @Column(name = "username", nullable = false, length = 45)
@@ -25,9 +25,7 @@ public class EmployeeEntity implements BaseEntity<Integer> {
     private Boolean isAdmin;
     @OneToMany(mappedBy = "employee")
     private List<AssignmentEntity> assignments;
-    @OneToOne
-    @JoinColumn(name = "Person_id", referencedColumnName = "id", nullable = false)
-    private PersonEntity person;
+
     @OneToMany(mappedBy = "employee")
     private List<ResidentEntity> residents;
 

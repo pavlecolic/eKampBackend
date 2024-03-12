@@ -23,7 +23,7 @@ public class ResidentEntity implements BaseEntity<Integer> {
     @JoinColumn(name = "person_id", referencedColumnName = "id", nullable = false)
     private PersonEntity person;
     @ManyToOne
-    @JoinColumn(name = "employee_person_id", referencedColumnName = "Person_id", nullable = false)
+    @JoinColumn(name = "employee_person_id", referencedColumnName = "person_id", nullable = false)
     private EmployeeEntity employee;
 
 }

@@ -17,4 +17,6 @@ public class EmployeeController extends CrudController<Integer, EmployeeRequest,
     protected EmployeeController(EmployeeService crudService) {
         super(Employee.class, crudService);
     }
+
+
 }
