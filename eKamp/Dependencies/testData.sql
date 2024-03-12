@@ -21,7 +21,7 @@ INSERT INTO `eKamp`.`place` (`description`, `municipility_id`) VALUES ('CN Tower
 INSERT INTO `eKamp`.`place` (`description`, `municipility_id`) VALUES ('Buckingham Palace', 3);
 
 -- Employee
-INSERT INTO `eKamp`.`employee` (`Person_id`, `username`, `password`, `is_admin`) VALUES (1, 'johndoe', 'password123', 1);
+INSERT INTO `eKamp`.`employee` (`person_id`, `username`, `password`, `is_admin`) VALUES (1, 'johndoe', 'password123', 1);
 
 -- Camp Status
 INSERT INTO `eKamp`.`camp_status` (`name`) VALUES ('Open');
