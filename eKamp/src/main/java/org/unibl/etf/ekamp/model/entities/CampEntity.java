@@ -2,13 +2,14 @@ package org.unibl.etf.ekamp.model.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.unibl.etf.ekamp.base.BaseEntity;
 
 import java.util.List;
 
 @Data
 @Entity
 @Table(name = "camp")
-public class CampEntity {
+public class CampEntity implements BaseEntity<Integer> {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id", nullable = false)
