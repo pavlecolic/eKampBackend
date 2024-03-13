@@ -22,5 +22,4 @@ public class PlaceEntity implements BaseEntity<Integer> {
     @ManyToOne
     @JoinColumn(name = "municipality_id", referencedColumnName = "id", nullable = false)
     private MunicipalityEntity municipality;
-
 }
