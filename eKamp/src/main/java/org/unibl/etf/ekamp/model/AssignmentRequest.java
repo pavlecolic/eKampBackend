@@ -8,7 +8,7 @@ public class AssignmentRequest {
 
     private Date startDate;
     private Date endDate;
-    private String employeeName;
-    private String campName;
+    private Integer employeeId;
+    private Integer campId;
 
 }

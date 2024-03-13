@@ -14,8 +14,7 @@ public class Camp {
     private Integer id;
     private String name;
     private Integer capacity;
-    private PlaceEntity place;
-    private CampStatusEntity campStatus;
-
-
+    // TODO: da li treba jos info o lokaciji
+    private String placeDescription;
+    private String campStatusName;
 }

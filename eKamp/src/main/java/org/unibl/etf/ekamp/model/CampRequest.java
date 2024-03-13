@@ -8,7 +8,7 @@ public class CampRequest {
 
     private String name;
     private Integer capacity;
-    private PlaceEntity place;
-    private CampStatusEntity campStatus;
+    private Integer placeId;
+    private Integer campStatusId;
 
 }

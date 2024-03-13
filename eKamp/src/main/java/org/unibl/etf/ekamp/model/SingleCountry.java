@@ -10,7 +10,7 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class SingleCountry extends Country {
-    private List<MunicipalityEntity> municipilities;
-    private List<PersonEntity> people;
+    private List<Municipality> municipalities;
+    private List<Person> people;
 
 }

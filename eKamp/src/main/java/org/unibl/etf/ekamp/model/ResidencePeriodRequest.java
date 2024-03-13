@@ -13,7 +13,7 @@ public class ResidencePeriodRequest {
 
     private Timestamp endDate;
 
-    private CampEntity camp;
+    private Integer campId;
 
-    private ResidentEntity resident;
+    private Integer residentId;
 }

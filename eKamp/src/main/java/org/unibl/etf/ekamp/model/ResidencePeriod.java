@@ -15,8 +15,7 @@ public class ResidencePeriod {
 
     private Timestamp endDate;
 
-    private CampEntity camp;
+    private String campName;
 
-    private ResidentEntity resident;
-
+    private String residentJmbg;
 }
