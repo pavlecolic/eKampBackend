@@ -48,9 +48,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `eKamp`.`municipility`
+-- Table `eKamp`.`municipality`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `eKamp`.`municipility` (
+CREATE TABLE IF NOT EXISTS `eKamp`.`municipality` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NULL,
   `country_id` INT NOT NULL,
@@ -72,12 +72,12 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `eKamp`.`place` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `description` VARCHAR(200) NULL,
-  `municipility_id` INT NOT NULL,
+  `municipality_id` INT NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_Place_Municipility1_idx` (`municipility_id` ASC) VISIBLE,
-  CONSTRAINT `fk_Place_Municipility1`
-    FOREIGN KEY (`municipility_id`)
-    REFERENCES `eKamp`.`municipility` (`id`)
+  INDEX `fk_place_municipality1_idx` (`municipality_id` ASC) VISIBLE,
+  CONSTRAINT `fk_place_municipality1`
+    FOREIGN KEY (`municipality_id`)
+    REFERENCES `eKamp`.`municipality` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;

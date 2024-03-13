@@ -11,14 +11,14 @@ INSERT INTO `eKamp`.`person` (`first_name`, `last_name`, `date_of_birth`, `sex`,
 INSERT INTO `eKamp`.`person` (`first_name`, `last_name`, `date_of_birth`, `sex`, `jmbg`, `country_id`) VALUES ('Michael', 'Johnson', '1978-12-03', 'M', '4567890123456', 3);
 
 -- Municipality
-INSERT INTO `eKamp`.`municipility` (`name`, `country_id`, `post_code`) VALUES ('New York City', 1, '10001');
-INSERT INTO `eKamp`.`municipility` (`name`, `country_id`, `post_code`) VALUES ('Toronto', 2, 'M5V 1J1');
-INSERT INTO `eKamp`.`municipility` (`name`, `country_id`, `post_code`) VALUES ('London', 3, 'SW1A 1AA');
+INSERT INTO `eKamp`.`municipality` (`name`, `country_id`, `post_code`) VALUES ('New York City', 1, '10001');
+INSERT INTO `eKamp`.`municipality` (`name`, `country_id`, `post_code`) VALUES ('Toronto', 2, 'M5V 1J1');
+INSERT INTO `eKamp`.`municipality` (`name`, `country_id`, `post_code`) VALUES ('London', 3, 'SW1A 1AA');
 
 -- Place
-INSERT INTO `eKamp`.`place` (`description`, `municipility_id`) VALUES ('Central Park', 1);
-INSERT INTO `eKamp`.`place` (`description`, `municipility_id`) VALUES ('CN Tower', 2);
-INSERT INTO `eKamp`.`place` (`description`, `municipility_id`) VALUES ('Buckingham Palace', 3);
+INSERT INTO `eKamp`.`place` (`description`, `municipality_id`) VALUES ('Central Park', 1);
+INSERT INTO `eKamp`.`place` (`description`, `municipality_id`) VALUES ('CN Tower', 2);
+INSERT INTO `eKamp`.`place` (`description`, `municipality_id`) VALUES ('Buckingham Palace', 3);
 
 -- Employee
 INSERT INTO `eKamp`.`employee` (`person_id`, `username`, `password`, `is_admin`) VALUES (1, 'johndoe', 'password123', 1);

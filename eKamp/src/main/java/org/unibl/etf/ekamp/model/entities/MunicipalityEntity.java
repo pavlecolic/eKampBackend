@@ -8,8 +8,8 @@ import java.util.List;
 
 @Data
 @Entity
-@Table(name = "municipility")
-public class MunicipilityEntity implements BaseEntity<Integer> {
+@Table(name = "municipality")
+public class MunicipalityEntity implements BaseEntity<Integer> {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id", nullable = false)
@@ -23,7 +23,7 @@ public class MunicipilityEntity implements BaseEntity<Integer> {
     @ManyToOne
     @JoinColumn(name = "country_id", referencedColumnName = "id", nullable = false)
     private CountryEntity country;
-    @OneToMany(mappedBy = "municipility")
+    @OneToMany(mappedBy = "municipality")
     private List<PlaceEntity> places;
 
 }

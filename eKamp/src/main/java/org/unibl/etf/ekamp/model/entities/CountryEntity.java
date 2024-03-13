@@ -20,7 +20,7 @@ public class CountryEntity implements BaseEntity<Integer> {
     private String name;
     @OneToMany(mappedBy = "country")
     @JsonIgnore
-    private List<MunicipilityEntity> municipilities;
+    private List<MunicipalityEntity> municipalities;
     @OneToMany(mappedBy = "country")
     @JsonIgnore
     private List<PersonEntity> people;

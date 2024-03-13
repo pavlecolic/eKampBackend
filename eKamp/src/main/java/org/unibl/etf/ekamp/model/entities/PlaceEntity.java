@@ -20,7 +20,7 @@ public class PlaceEntity implements BaseEntity<Integer> {
     @OneToMany(mappedBy = "place")
     private List<CampEntity> camps;
     @ManyToOne
-    @JoinColumn(name = "municipility_id", referencedColumnName = "id", nullable = false)
-    private MunicipilityEntity municipility;
+    @JoinColumn(name = "municipality_id", referencedColumnName = "id", nullable = false)
+    private MunicipalityEntity municipality;
 
 }
