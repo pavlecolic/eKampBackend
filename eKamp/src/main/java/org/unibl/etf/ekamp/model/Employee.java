@@ -13,10 +13,11 @@ import java.util.List;
 public class Employee extends Person {
 
 
+
     private String password;
     private String username;
-   /* private Boolean isAdmin;
-    private List<AssignmentEntity> assignments;
+    private Boolean isAdmin;
+     /*private List<AssignmentEntity> assignments;
     private PersonEntity person;
     private List<ResidentEntity> residents;*/
 }
