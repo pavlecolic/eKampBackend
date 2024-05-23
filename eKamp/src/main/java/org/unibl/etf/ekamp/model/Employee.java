@@ -12,8 +12,6 @@ import java.util.List;
 @Data
 public class Employee extends Person {
 
-
-
     private String password;
     private String username;
     private Boolean isAdmin;

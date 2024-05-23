@@ -8,4 +8,5 @@ import lombok.EqualsAndHashCode;
 public class EmployeeRequest extends PersonRequest {
     private String password;
     private String username;
+    private boolean isAdmin = false;
 }

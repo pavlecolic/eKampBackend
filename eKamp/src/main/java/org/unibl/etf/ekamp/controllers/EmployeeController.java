@@ -15,10 +15,8 @@ import org.unibl.etf.ekamp.services.PersonService;
 @CrossOrigin
 @RequestMapping("/employees")
 public class EmployeeController extends CrudController<Integer, EmployeeRequest, Employee> {
-
     protected EmployeeController(EmployeeService crudService) {
         super(Employee.class, crudService);
     }
-
 
 }

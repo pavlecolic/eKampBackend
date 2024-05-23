@@ -18,6 +18,4 @@ public class CountryController extends CrudController<Integer, CountryRequest , 
     protected CountryController(CountryService countryService) {
         super(Country.class, countryService);
     }
-
-
 }
