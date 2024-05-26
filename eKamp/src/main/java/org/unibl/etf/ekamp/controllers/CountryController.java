@@ -12,7 +12,6 @@ import org.unibl.etf.ekamp.services.CountryService;
 
 @RestController
 @CrossOrigin
-
 @RequestMapping("/countries")
 public class CountryController extends CrudController<Integer, CountryRequest , Country> {
     protected CountryController(CountryService countryService) {
