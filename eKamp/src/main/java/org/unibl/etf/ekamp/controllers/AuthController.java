@@ -6,10 +6,12 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.unibl.etf.ekamp.model.*;
+import org.unibl.etf.ekamp.model.dto.Employee;
 import org.unibl.etf.ekamp.model.entities.CountryEntity;
 import org.unibl.etf.ekamp.model.entities.EmployeeEntity;
 import org.unibl.etf.ekamp.model.entities.PersonEntity;
+import org.unibl.etf.ekamp.model.requests.EmployeeRequest;
+import org.unibl.etf.ekamp.model.requests.RegisterRequest;
 import org.unibl.etf.ekamp.services.CountryService;
 import org.unibl.etf.ekamp.services.EmployeeService;
 

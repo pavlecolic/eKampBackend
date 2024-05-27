@@ -4,7 +4,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.unibl.etf.ekamp.base.CrudController;
 import org.unibl.etf.ekamp.base.CrudService;
-import org.unibl.etf.ekamp.model.*;
+import org.unibl.etf.ekamp.model.dto.Camp;
+import org.unibl.etf.ekamp.model.requests.CampRequest;
 import org.unibl.etf.ekamp.services.CampService;
 import org.unibl.etf.ekamp.services.EmployeeService;
 

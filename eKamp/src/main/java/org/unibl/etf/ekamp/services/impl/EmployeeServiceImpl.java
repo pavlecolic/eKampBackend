@@ -4,7 +4,7 @@ import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.unibl.etf.ekamp.base.CrudJpaService;
-import org.unibl.etf.ekamp.model.Employee;
+import org.unibl.etf.ekamp.model.dto.Employee;
 import org.unibl.etf.ekamp.model.entities.EmployeeEntity;
 import org.unibl.etf.ekamp.repositories.EmployeeEntityRepository;
 import org.unibl.etf.ekamp.services.EmployeeService;

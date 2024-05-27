@@ -5,7 +5,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import org.unibl.etf.ekamp.base.CrudJpaService;
-import org.unibl.etf.ekamp.model.ResidencePeriod;
 import org.unibl.etf.ekamp.model.entities.PlaceEntity;
 import org.unibl.etf.ekamp.model.entities.ResidencePeriodEntity;
 import org.unibl.etf.ekamp.repositories.ResidencePeriodRepository;
