@@ -10,7 +10,6 @@ import org.unibl.etf.ekamp.services.CampStatusService;
 
 @RestController
 @CrossOrigin
-
 @RequestMapping("/camp-statuses")
 public class CampStatusController extends CrudController<Integer, CampStatusRequest, CampStatus> {
     protected CampStatusController(CampStatusService crudService) {
