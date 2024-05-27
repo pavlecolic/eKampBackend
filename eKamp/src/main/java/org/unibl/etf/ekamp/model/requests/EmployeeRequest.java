@@ -1,7 +1,8 @@
-package org.unibl.etf.ekamp.model;
+package org.unibl.etf.ekamp.model.requests;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.unibl.etf.ekamp.model.requests.PersonRequest;
 
 @EqualsAndHashCode(callSuper = true)
 @Data

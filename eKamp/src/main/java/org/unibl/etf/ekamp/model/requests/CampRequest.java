@@ -1,4 +1,4 @@
-package org.unibl.etf.ekamp.model;
+package org.unibl.etf.ekamp.model.requests;
 
 import lombok.Data;
 import org.unibl.etf.ekamp.model.entities.CampStatusEntity;
@@ -10,5 +10,4 @@ public class CampRequest {
     private Integer capacity;
     private Integer placeId;
     private Integer campStatusId;
-
 }

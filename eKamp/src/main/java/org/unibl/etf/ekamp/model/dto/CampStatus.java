@@ -1,4 +1,4 @@
-package org.unibl.etf.ekamp.model;
+package org.unibl.etf.ekamp.model.dto;
 
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
