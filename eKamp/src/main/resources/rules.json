@@ -1,0 +1,67 @@
+{
+  "rules": [
+    {
+      "methods": [],
+      "pattern": "/assignments",
+      "roles": [
+        "ADMIN"
+      ]
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "pattern": "/camps",
+      "roles": [
+        "ADMIN",
+        "VOLUNTEER"
+      ]
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "pattern": "/municipalities",
+      "roles": [
+        "ADMIN",
+        "VOLUNTEER"
+      ]
+    },
+    {
+      "methods": [
+        "GET",
+        "POST",
+        "PUT",
+        "DELETE"
+      ],
+      "pattern": "/employees",
+      "roles": [
+        "ADMIN"
+      ]
+    },
+
+    {
+      "methods": [
+        "GET"
+      ],
+      "pattern": "/countries",
+      "roles": [
+        "ADMIN",
+        "VOLUNTEER"
+      ]
+    },
+
+    {
+      "methods": [
+        "GET",
+        "POST"
+
+      ],
+      "pattern": "/messages",
+      "roles": [
+        "ADMIN",
+        "VOLUNTEER"
+      ]
+    }
+  ]
+}

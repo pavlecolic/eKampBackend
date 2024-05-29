@@ -36,7 +36,8 @@ public class WebSecurityConfig {
     }
 
     @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration)
+            throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
 
@@ -58,8 +59,7 @@ public class WebSecurityConfig {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        interceptor.requestMatchers(HttpMethod.POST, "/login").permitAll();
-        interceptor.requestMatchers(HttpMethod.POST, "/sign-up").permitAll();
+        interceptor.requestMatchers(HttpMethod.POST, "/login").permitAll();;
         for (Rule rule : authorizationRules.getRules()) {
             if (rule.getMethods().isEmpty())
                 interceptor.requestMatchers(rule.getPattern()).hasAnyAuthority(rule.getRoles().toArray(String[]::new));

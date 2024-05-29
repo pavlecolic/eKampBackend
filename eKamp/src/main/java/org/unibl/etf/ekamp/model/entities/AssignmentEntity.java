@@ -21,7 +21,7 @@ public class AssignmentEntity implements BaseEntity<Integer> {
     @Column(name = "end_date", nullable = true)
     private Date endDate;
     @ManyToOne
-    @JoinColumn(name = "employee_person_id", referencedColumnName = "Person_id", nullable = false)
+    @JoinColumn(name = "employee_person_id", referencedColumnName = "person_id", nullable = false)
     private EmployeeEntity employee;
     @ManyToOne
     @JoinColumn(name = "camp_id", referencedColumnName = "id", nullable = false)

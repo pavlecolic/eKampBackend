@@ -6,8 +6,8 @@ import org.unibl.etf.ekamp.model.entities.EmployeeEntity;
 import java.util.Optional;
 
 public interface EmployeeEntityRepository extends JpaRepository<EmployeeEntity, Integer> {
-
      Optional<EmployeeEntity> findByUsername(String username);
+     Boolean existsByUsernameAndIdNot(String username, Integer id);
 
-
+     Boolean existsByUsername(String username);
 }

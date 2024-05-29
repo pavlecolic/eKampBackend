@@ -6,6 +6,8 @@ import lombok.EqualsAndHashCode;
 import org.unibl.etf.ekamp.model.entities.AssignmentEntity;
 import org.unibl.etf.ekamp.model.entities.PersonEntity;
 import org.unibl.etf.ekamp.model.entities.ResidentEntity;
+import org.unibl.etf.ekamp.model.enums.AccountStatus;
+import org.unibl.etf.ekamp.model.enums.Role;
 
 import java.util.List;
 @EqualsAndHashCode(callSuper = true)
@@ -14,7 +16,8 @@ public class Employee extends Person {
 
     private String password;
     private String username;
-    private Boolean isAdmin;
+    private Role role;
+    private AccountStatus status;
      /*private List<AssignmentEntity> assignments;
     private PersonEntity person;
     private List<ResidentEntity> residents;*/
