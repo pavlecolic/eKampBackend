@@ -10,7 +10,7 @@ import org.unibl.etf.ekamp.model.requests.PlaceRequest;
 import org.unibl.etf.ekamp.services.PlaceService;
 
 @RestController
-@CrossOrigin
+//@CrossOrigin
 @RequestMapping("/places")
 public class PlaceController extends CrudController<Integer, PlaceRequest, Place> {
     protected PlaceController(PlaceService placeService) {

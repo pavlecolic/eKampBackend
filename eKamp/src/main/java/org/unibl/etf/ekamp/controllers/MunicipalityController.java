@@ -10,7 +10,7 @@ import org.unibl.etf.ekamp.model.requests.MunicipalityRequest;
 import org.unibl.etf.ekamp.services.MunicipalityService;
 
 @RestController
-@CrossOrigin
+//@CrossOrigin
 @RequestMapping("/municipalities")
 public class MunicipalityController extends CrudController<Integer, MunicipalityRequest, Municipality> {
     protected MunicipalityController(MunicipalityService municipalityService) {

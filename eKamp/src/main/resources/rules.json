@@ -16,6 +16,15 @@
         "ADMIN",
         "VOLUNTEER"
       ]
+    },{
+      "methods": [
+        "GET"
+      ],
+      "pattern": "/camp-statuses",
+      "roles": [
+        "ADMIN",
+        "VOLUNTEER"
+      ]
     },
     {
       "methods": [
@@ -81,7 +90,7 @@
     },
     {
       "methods": [],
-      "pattern": "/residents",
+      "pattern": "/residents/**",
       "roles": [
         "ADMIN",
         "VOLUNTEER"
