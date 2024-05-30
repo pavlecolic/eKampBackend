@@ -18,7 +18,7 @@ public class ResidentEntity extends PersonEntity implements BaseEntity<Integer> 
     @OneToMany(mappedBy = "resident")
     private List<ResidencePeriodEntity> residencePeriods;
     @ManyToOne
-    @JoinColumn(name = "employee_person_id", referencedColumnName = "person_id", nullable = false)
+    @JoinColumn(name = "employee_person_id", referencedColumnName = "person_id", nullable=false) // Column in the current entity
     private EmployeeEntity employee;
 
 }

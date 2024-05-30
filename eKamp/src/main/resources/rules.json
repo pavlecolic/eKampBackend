@@ -36,7 +36,7 @@
       ],
       "pattern": "/employees",
       "roles": [
-        "ADMIN"
+        "VOLUNTEER"
       ]
     },
 
@@ -86,7 +86,42 @@
         "ADMIN",
         "VOLUNTEER"
       ]
-    }
+    },
 
+    {
+      "methods": [],
+      "pattern": "/residents/**",
+      "roles": [
+        "ADMIN",
+        "VOLUNTEER"
+      ]
+    },
+
+    {
+      "methods": [],
+      "pattern": "/residence-periods/**",
+      "roles": [
+        "ADMIN",
+        "VOLUNTEER"
+      ]
+    },
+
+    {
+      "methods": [],
+      "pattern": "/employees/**",
+      "roles": [
+        "ADMIN"
+      ]
+    },
+
+    {
+      "methods": [
+      ],
+      "pattern": "/employees/*",
+      "roles": [
+        "ADMIN",
+        "VOLUNTEER"
+      ]
+    }
   ]
 }
