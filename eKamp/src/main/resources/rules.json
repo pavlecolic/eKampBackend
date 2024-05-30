@@ -46,7 +46,7 @@
       ],
       "pattern": "/employees",
       "roles": [
-        "VOLUNTEER"
+        "ADMIN"
       ]
     },
 
