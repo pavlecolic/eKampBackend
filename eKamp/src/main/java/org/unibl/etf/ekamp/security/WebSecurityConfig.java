@@ -41,16 +41,17 @@ public class WebSecurityConfig {
         return authenticationConfiguration.getAuthenticationManager();
     }
 
-    @Bean
-    protected SecurityFilterChain configure(HttpSecurity http) throws Exception {
-        return http.cors(AbstractHttpConfigurer::disable)
-                .csrf(AbstractHttpConfigurer::disable)
-                .sessionManagement(c -> c.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authorizeHttpRequests(this::createRules)
-                .userDetailsService(jwtEmployeeDetailsService)
-                .addFilterBefore(authorizationFilter, UsernamePasswordAuthenticationFilter.class)
-                .build();
-    }
+        @Bean
+        protected SecurityFilterChain configure(HttpSecurity http) throws Exception {
+            return http.cors()
+                    .and()
+                    .csrf(AbstractHttpConfigurer::disable)
+                    .sessionManagement(c -> c.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                    .authorizeHttpRequests(this::createRules)
+                    .userDetailsService(jwtEmployeeDetailsService)
+                    .addFilterBefore(authorizationFilter, UsernamePasswordAuthenticationFilter.class)
+                    .build();
+        }
 
     private void createRules(AuthorizeHttpRequestsConfigurer<HttpSecurity>.AuthorizationManagerRequestMatcherRegistry interceptor) {
         AuthorizationRules authorizationRules;
@@ -59,7 +60,7 @@ public class WebSecurityConfig {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        interceptor.requestMatchers(HttpMethod.POST, "/login").permitAll();;
+        interceptor.requestMatchers(HttpMethod.POST, "/login").permitAll();
         for (Rule rule : authorizationRules.getRules()) {
             if (rule.getMethods().isEmpty())
                 interceptor.requestMatchers(rule.getPattern()).hasAnyAuthority(rule.getRoles().toArray(String[]::new));

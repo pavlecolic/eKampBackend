@@ -1,21 +1,15 @@
 package org.unibl.etf.ekamp.controllers;
 
-import io.jsonwebtoken.Jwt;
 import jakarta.validation.Valid;
-import org.modelmapper.ModelMapper;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
-import org.unibl.etf.ekamp.base.CrudController;
-import org.unibl.etf.ekamp.base.CrudJpaService;
 import org.unibl.etf.ekamp.exceptions.ForbiddenException;
 import org.unibl.etf.ekamp.model.dto.Employee;
 import org.unibl.etf.ekamp.model.dto.JwtEmployee;
-import org.unibl.etf.ekamp.model.entities.EmployeeEntity;
 import org.unibl.etf.ekamp.model.requests.ChangeEmployeeStatusRequest;
-import org.unibl.etf.ekamp.model.requests.EmployeeRequest;
+import org.unibl.etf.ekamp.model.requests.EmployeeUpdateRequest;
 import org.unibl.etf.ekamp.services.EmployeeService;
-import org.unibl.etf.ekamp.services.PersonService;
+import org.unibl.etf.ekamp.model.enums.Role;
 
 import java.util.List;
 
@@ -44,11 +38,12 @@ public class EmployeeController {
     }
 
     @PutMapping("/{id}")
-    public Employee update(@PathVariable Integer id, @Valid @RequestBody EmployeeRequest request, Authentication auth) {
+    public Employee update(@PathVariable Integer id, @Valid @RequestBody EmployeeUpdateRequest request, Authentication auth) {
         JwtEmployee jwtUser = (JwtEmployee) auth.getPrincipal();
-        if (!jwtUser.getId().equals(id))
+        // prijavljeni korisnik mora da bude administrator da bi izmijenio volonterski nalog
+        if (jwtUser.getRole() != Role.ADMIN)
             throw new ForbiddenException();
-        return service.update(id, request, Employee.class);
+        return service.update(id, request);
     }
 
     // dodati GET I POST

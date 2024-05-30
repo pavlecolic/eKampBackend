@@ -12,6 +12,7 @@ import org.unibl.etf.ekamp.model.entities.EmployeeEntity;
 import org.unibl.etf.ekamp.model.enums.AccountStatus;
 import org.unibl.etf.ekamp.model.requests.ChangeEmployeeStatusRequest;
 import org.unibl.etf.ekamp.model.requests.EmployeeRequest;
+import org.unibl.etf.ekamp.model.requests.EmployeeUpdateRequest;
 import org.unibl.etf.ekamp.repositories.CountryEntityRepository;
 import org.unibl.etf.ekamp.repositories.EmployeeEntityRepository;
 import org.unibl.etf.ekamp.services.EmployeeService;
@@ -66,7 +67,8 @@ public class EmployeeServiceImpl extends CrudJpaService<EmployeeEntity, Integer>
         repository.save(entity);
     }
 
-    public Employee update(Integer id, EmployeeRequest user) {
+    @Override
+    public Employee update(Integer id, EmployeeUpdateRequest user) {
         if (repository.existsByUsernameAndIdNot(user.getUsername(), id))
             throw new ConflictException();
         EmployeeEntity entity = findEntityById(id);
@@ -85,4 +87,5 @@ public class EmployeeServiceImpl extends CrudJpaService<EmployeeEntity, Integer>
         entity.setStatus(getModelMapper().map(request.getAccountStatus(), AccountStatus.class));
         repository.saveAndFlush(entity);
     }
+
 }

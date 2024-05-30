@@ -11,5 +11,5 @@ import org.unibl.etf.ekamp.model.enums.Role;
 public class EmployeeRequest extends PersonRequest {
     private String password;
     private String username;
-    private Role role = Role.VOLUNTEER;
+    private Role role;
 }

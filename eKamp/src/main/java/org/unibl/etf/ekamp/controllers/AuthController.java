@@ -21,7 +21,6 @@ import org.unibl.etf.ekamp.model.enums.Role;
 
 import java.util.Map;
 
-@CrossOrigin
 @RestController
 public class AuthController {
 

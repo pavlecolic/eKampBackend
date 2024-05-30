@@ -55,13 +55,38 @@
       "methods": [
         "GET",
         "POST"
-
       ],
       "pattern": "/messages",
       "roles": [
         "ADMIN",
         "VOLUNTEER"
       ]
+    },
+
+    {
+      "methods": [],
+      "pattern": "/places",
+      "roles": [
+        "ADMIN",
+        "VOLUNTEER"
+      ]
+    },
+    {
+      "methods": [],
+      "pattern": "/residence-periods",
+      "roles": [
+        "ADMIN",
+        "VOLUNTEER"
+      ]
+    },
+    {
+      "methods": [],
+      "pattern": "/residents",
+      "roles": [
+        "ADMIN",
+        "VOLUNTEER"
+      ]
     }
+
   ]
 }

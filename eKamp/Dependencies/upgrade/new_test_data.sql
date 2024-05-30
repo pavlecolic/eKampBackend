@@ -26,9 +26,9 @@ INSERT INTO `eKamp`.`person` (`first_name`, `last_name`, `date_of_birth`, `sex`,
 
 -- Insert data into employee table
 INSERT INTO `eKamp`.`employee` (`person_id`, `username`, `password`, `is_admin`, `is_active`) VALUES 
-(1, 'johndoe', SHA2('password123', 256), 1, 1),
-(2, 'janesmith', SHA2('password123', 256), 0, 1),
-(3, 'jimbeam', SHA2('password123', 256), 0, 1);
+(1, 'johndoe', '$2y$10$6mCacTRfIEiNRoUBgZR9huwealb1CBG7.iukbXw6HJ7kH5UDP16KG', 1, 1),
+(2, 'janesmith', '$2y$10$CrZclESnFMWQcigKHeNqt.t4sEUmOwQvF1OwjKPrE0AMR/TDG1eQ6', 0, 1),
+(3, 'jimbeam', '$2y$10$jeU92LgU/cZ/hdv38XOr2eCWT3/WOKckq3KJha23tBKaSd4nZVG06', 0, 1);
 
 -- Insert data into camp_status table
 INSERT INTO `eKamp`.`camp_status` (`name`) VALUES 
@@ -65,3 +65,5 @@ INSERT INTO `eKamp`.`message` (`content`, `time_created`, `employee_person_id`) 
 ('Welcome to Camp Alpha!', '2024-01-01 12:00:00', 1),
 ('Please follow the camp rules.', '2024-02-01 13:00:00', 2),
 ('Emergency drill at 3 PM.', '2024-03-01 14:00:00', 3);
+
+
