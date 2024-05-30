@@ -7,6 +7,7 @@ import org.unibl.etf.ekamp.exceptions.ForbiddenException;
 import org.unibl.etf.ekamp.model.dto.Employee;
 import org.unibl.etf.ekamp.model.dto.JwtEmployee;
 import org.unibl.etf.ekamp.model.requests.ChangeEmployeeStatusRequest;
+import org.unibl.etf.ekamp.model.requests.EmployeeRequest;
 import org.unibl.etf.ekamp.model.requests.EmployeeUpdateRequest;
 import org.unibl.etf.ekamp.services.EmployeeService;
 import org.unibl.etf.ekamp.model.enums.Role;
@@ -50,6 +51,13 @@ public class EmployeeController {
         return service.update(id, request);
     }
 
-    // dodati GET I POST
+    @PostMapping
+    public Employee signUp(@Valid @RequestBody EmployeeRequest request, Authentication authentication) {
+        JwtEmployee jwtEmployee  = (JwtEmployee) authentication.getPrincipal();
+        if(jwtEmployee.getRole() != Role.ADMIN)
+            throw new ForbiddenException();
+        return service.signUp(request);
+    }
+
 
 }

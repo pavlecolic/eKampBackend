@@ -81,6 +81,18 @@ public class EmployeeServiceImpl extends CrudJpaService<EmployeeEntity, Integer>
         entity.setCountry(countryEntityRepository.findById(user.getCountryId()).orElse(null));
         return update(id, entity, Employee.class);
     }
+
+    @Override
+    public Employee signUp(EmployeeRequest request) {
+        if(repository.existsByUsername(request.getUsername()))
+            throw new ConflictException();
+        EmployeeEntity employeeEntity = getModelMapper().map(request, EmployeeEntity.class);
+        employeeEntity.setStatus(AccountStatus.ACTIVE);
+        employeeEntity.setRole(Role.VOLUNTEER);
+        Employee employee = insert(employeeEntity, Employee.class);
+        return employee;
+    }
+
     @Override
     public void changeStatus(Integer userId, ChangeEmployeeStatusRequest request) {
         EmployeeEntity entity = findEntityById(userId);
