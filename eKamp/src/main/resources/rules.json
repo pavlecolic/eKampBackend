@@ -107,21 +107,14 @@
     },
 
     {
-      "methods": [],
+      "methods": [
+        "PATCH"
+      ],
       "pattern": "/employees/**",
       "roles": [
         "ADMIN"
       ]
-    },
-
-    {
-      "methods": [
-      ],
-      "pattern": "/employees/*",
-      "roles": [
-        "ADMIN",
-        "VOLUNTEER"
-      ]
     }
+
   ]
 }

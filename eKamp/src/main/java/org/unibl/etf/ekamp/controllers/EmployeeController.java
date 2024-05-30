@@ -33,7 +33,7 @@ public class EmployeeController {
     @PatchMapping("/{id}/status")
     public void changeStatus(@PathVariable Integer id, @RequestBody @Valid ChangeEmployeeStatusRequest request, Authentication auth) {
         JwtEmployee jwtUser = (JwtEmployee) auth.getPrincipal();
-        if (jwtUser.getId().equals(id))
+        if (jwtUser.getRole() != Role.ADMIN)
             throw new ForbiddenException();
         service.changeStatus(id, request);
     }

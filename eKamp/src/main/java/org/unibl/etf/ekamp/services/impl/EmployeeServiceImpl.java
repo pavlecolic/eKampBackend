@@ -87,6 +87,7 @@ public class EmployeeServiceImpl extends CrudJpaService<EmployeeEntity, Integer>
         if(repository.existsByUsername(request.getUsername()))
             throw new ConflictException();
         EmployeeEntity employeeEntity = getModelMapper().map(request, EmployeeEntity.class);
+        employeeEntity.setPassword(passwordEncoder.encode(employeeEntity.getPassword()));
         employeeEntity.setStatus(AccountStatus.ACTIVE);
         employeeEntity.setRole(Role.VOLUNTEER);
         Employee employee = insert(employeeEntity, Employee.class);
