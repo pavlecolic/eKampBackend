@@ -4,7 +4,8 @@
       "methods": [],
       "pattern": "/assignments",
       "roles": [
-        "ADMIN"
+        "ADMIN",
+        "VOLUNTEER"
       ]
     },
     {
