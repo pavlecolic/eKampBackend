@@ -1,20 +1,51 @@
 package org.unibl.etf.ekamp.controllers;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.unibl.etf.ekamp.base.CrudController;
+import jakarta.validation.Valid;
+import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.*;
+import org.unibl.etf.ekamp.exceptions.ForbiddenException;
 import org.unibl.etf.ekamp.model.dto.Employee;
-import org.unibl.etf.ekamp.model.requests.EmployeeRequest;
+import org.unibl.etf.ekamp.model.dto.JwtEmployee;
+import org.unibl.etf.ekamp.model.requests.ChangeEmployeeStatusRequest;
+import org.unibl.etf.ekamp.model.requests.EmployeeUpdateRequest;
 import org.unibl.etf.ekamp.services.EmployeeService;
-import org.unibl.etf.ekamp.services.PersonService;
+import org.unibl.etf.ekamp.model.enums.Role;
+
+import java.util.List;
 
 @RestController
 @CrossOrigin
 @RequestMapping("/employees")
-public class EmployeeController extends CrudController<Integer, EmployeeRequest, Employee> {
-    protected EmployeeController(EmployeeService crudService) {
-        super(Employee.class, crudService);
+public class EmployeeController {
+
+    EmployeeService service;
+
+    public EmployeeController(EmployeeService service) {
+        this.service = service;
     }
+
+    @GetMapping
+    public List<Employee> getAll() {
+        return service.findAll(Employee.class);
+    }
+
+    @PatchMapping("/{id}/status")
+    public void changeStatus(@PathVariable Integer id, @RequestBody @Valid ChangeEmployeeStatusRequest request, Authentication auth) {
+        JwtEmployee jwtUser = (JwtEmployee) auth.getPrincipal();
+        if (jwtUser.getId().equals(id))
+            throw new ForbiddenException();
+        service.changeStatus(id, request);
+    }
+
+    @PutMapping("/{id}")
+    public Employee update(@PathVariable Integer id, @Valid @RequestBody EmployeeUpdateRequest request, Authentication auth) {
+        JwtEmployee jwtUser = (JwtEmployee) auth.getPrincipal();
+        // prijavljeni korisnik mora da bude administrator da bi izmijenio volonterski nalog
+        if (jwtUser.getRole() != Role.ADMIN)
+            throw new ForbiddenException();
+        return service.update(id, request);
+    }
+
+    // dodati GET I POST
 
 }

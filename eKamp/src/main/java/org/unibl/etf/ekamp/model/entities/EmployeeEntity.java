@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.unibl.etf.ekamp.base.BaseEntity;
 
+import org.unibl.etf.ekamp.model.enums.Role;
+import org.unibl.etf.ekamp.model.enums.AccountStatus;
 import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
@@ -19,21 +21,24 @@ public class EmployeeEntity extends PersonEntity implements BaseEntity<Integer> 
     @Basic
     @Column(name = "password", nullable = false, length = 64)
     private String password;
-    @Basic
+
+    @Enumerated(EnumType.ORDINAL)
     @Column(name = "is_admin", nullable = false)
-    private Boolean isAdmin;
+    private Role role;
+
+    @Enumerated(EnumType.ORDINAL)
+    @Column(name="is_active", nullable = false)
+    private AccountStatus status;
+
     @OneToMany(mappedBy = "employee")
     private List<AssignmentEntity> assignments;
 
     @OneToMany(mappedBy = "employee")
     private List<ResidentEntity> residents;
 
-    public Boolean getAdmin() {
-        return isAdmin;
-    }
+    @OneToMany(mappedBy = "employee")
+    private List<MessageEntity> messages;
 
-    public void setAdmin(Boolean admin) {
-        isAdmin = admin;
-    }
+
 
 }

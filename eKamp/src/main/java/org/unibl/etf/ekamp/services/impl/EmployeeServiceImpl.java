@@ -2,33 +2,90 @@ package org.unibl.etf.ekamp.services.impl;
 
 import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.unibl.etf.ekamp.base.CrudJpaService;
+import org.unibl.etf.ekamp.exceptions.ConflictException;
 import org.unibl.etf.ekamp.model.dto.Employee;
 import org.unibl.etf.ekamp.model.entities.EmployeeEntity;
+import org.unibl.etf.ekamp.model.enums.AccountStatus;
+import org.unibl.etf.ekamp.model.requests.ChangeEmployeeStatusRequest;
+import org.unibl.etf.ekamp.model.requests.EmployeeRequest;
+import org.unibl.etf.ekamp.model.requests.EmployeeUpdateRequest;
+import org.unibl.etf.ekamp.repositories.CountryEntityRepository;
 import org.unibl.etf.ekamp.repositories.EmployeeEntityRepository;
 import org.unibl.etf.ekamp.services.EmployeeService;
+import org.springframework.jms.core.JmsTemplate;;
 
-import java.util.Optional;
+import org.unibl.etf.ekamp.model.enums.Role;
 
 @Service
 @Transactional
 public class EmployeeServiceImpl extends CrudJpaService<EmployeeEntity, Integer> implements EmployeeService {
-    public EmployeeServiceImpl(EmployeeEntityRepository repository, ModelMapper modelMapper) {
+
+    private final EmployeeEntityRepository repository;
+    private final CountryEntityRepository countryEntityRepository;
+    private final PasswordEncoder passwordEncoder;
+
+
+
+    public EmployeeServiceImpl(ModelMapper modelMapper, EmployeeEntityRepository repository, CountryEntityRepository countryEntityRepository, PasswordEncoder passwordEncoder){
+
         super(repository, EmployeeEntity.class, modelMapper);
+        this.repository = repository;
+        this.countryEntityRepository = countryEntityRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
+
+//    @Override
+//    public Employee findByUsername(String username) {
+//        Optional<EmployeeEntity> employeeOpt = getRepository().findAll().stream().filter(u -> u.getUsername().equals(username)).findFirst();
+//        if (employeeOpt.isPresent()) {
+//            EmployeeEntity ent = employeeOpt.get();
+//            Employee employee = new Employee();
+//            employee.setUsername(ent.getUsername());
+//            employee.setPassword(ent.getPassword());
+//            employee.setIsAdmin(ent.getIsAdmin());
+//            return employee;
+//        }
+//        return null;
+//    }
+
+    @Override
+    public Employee findByUsername(String username) throws UsernameNotFoundException {
+        return getModelMapper().map(repository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException(username)), Employee.class);
+    }
+
+    public void create(EmployeeRequest request) {
+        if(repository.existsByUsername(request.getUsername()))
+            throw new ConflictException();
+        EmployeeEntity entity = getModelMapper().map(request, EmployeeEntity.class);
+        entity.setPassword(passwordEncoder.encode(entity.getPassword()));
+        entity.setStatus(AccountStatus.ACTIVE);
+        entity.setRole(Role.VOLUNTEER);
+        repository.save(entity);
     }
 
     @Override
-    public Employee findByUsername(String username) {
-        Optional<EmployeeEntity> employeeOpt = getRepository().findAll().stream().filter(u -> u.getUsername().equals(username)).findFirst();
-        if (employeeOpt.isPresent()) {
-            EmployeeEntity ent = employeeOpt.get();
-            Employee employee = new Employee();
-            employee.setUsername(ent.getUsername());
-            employee.setPassword(ent.getPassword());
-            employee.setIsAdmin(ent.getIsAdmin());
-            return employee;
-        }
-        return null;
+    public Employee update(Integer id, EmployeeUpdateRequest user) {
+        if (repository.existsByUsernameAndIdNot(user.getUsername(), id))
+            throw new ConflictException();
+        EmployeeEntity entity = findEntityById(id);
+        entity.setUsername(user.getUsername());
+        entity.setFirstName(user.getFirstName());
+        entity.setLastName(user.getLastName());
+        entity.setDateOfBirth(user.getDateOfBirth());
+        entity.setSex(user.getSex());
+        entity.setJmbg(user.getJmbg());
+        entity.setCountry(countryEntityRepository.findById(user.getCountryId()).orElse(null));
+        return update(id, entity, Employee.class);
     }
+    @Override
+    public void changeStatus(Integer userId, ChangeEmployeeStatusRequest request) {
+        EmployeeEntity entity = findEntityById(userId);
+        entity.setStatus(getModelMapper().map(request.getAccountStatus(), AccountStatus.class));
+        repository.saveAndFlush(entity);
+    }
+
 }

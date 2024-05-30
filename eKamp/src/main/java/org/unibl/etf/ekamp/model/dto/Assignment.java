@@ -9,6 +9,6 @@ public class Assignment {
         private Integer id;
         private Date startDate;
         private Date endDate;
-        private String employeeJmbg;
+        private Integer employeeId;
         private String campName;
 }
