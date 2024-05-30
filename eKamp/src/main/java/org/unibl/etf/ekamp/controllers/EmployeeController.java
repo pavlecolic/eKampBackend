@@ -36,6 +36,10 @@ public class EmployeeController {
             throw new ForbiddenException();
         service.changeStatus(id, request);
     }
+    @GetMapping("/{id}")
+    public Employee get(@PathVariable Integer id) {
+        return service.findById(id, Employee.class);
+    }
 
     @PutMapping("/{id}")
     public Employee update(@PathVariable Integer id, @Valid @RequestBody EmployeeUpdateRequest request, Authentication auth) {

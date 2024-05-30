@@ -10,4 +10,6 @@ public interface EmployeeEntityRepository extends JpaRepository<EmployeeEntity, 
      Boolean existsByUsernameAndIdNot(String username, Integer id);
 
      Boolean existsByUsername(String username);
+
+
 }

@@ -8,7 +8,5 @@ import lombok.EqualsAndHashCode;
 public class Resident extends Person {
 
     private Boolean needsHospitalisation;
-    // Maticni employee-a koji ga je dodao u kamp, po potrebi moze i Employee objekat
     private String employeeJmbg;
-
 }
