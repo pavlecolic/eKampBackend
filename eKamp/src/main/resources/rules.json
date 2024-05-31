@@ -117,9 +117,7 @@
     },
 
     {
-      "methods": [
-        "PATCH"
-      ],
+      "methods": [],
       "pattern": "/employees/**",
       "roles": [
         "ADMIN"

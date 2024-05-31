@@ -7,18 +7,24 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.unibl.etf.ekamp.base.CrudJpaService;
 import org.unibl.etf.ekamp.exceptions.ConflictException;
+import org.unibl.etf.ekamp.exceptions.ForbiddenException;
+import org.unibl.etf.ekamp.model.dto.Assignment;
 import org.unibl.etf.ekamp.model.dto.Employee;
+import org.unibl.etf.ekamp.model.entities.AssignmentEntity;
 import org.unibl.etf.ekamp.model.entities.EmployeeEntity;
 import org.unibl.etf.ekamp.model.enums.AccountStatus;
-import org.unibl.etf.ekamp.model.requests.ChangeEmployeeStatusRequest;
-import org.unibl.etf.ekamp.model.requests.EmployeeRequest;
-import org.unibl.etf.ekamp.model.requests.EmployeeUpdateRequest;
+import org.unibl.etf.ekamp.model.requests.*;
+import org.unibl.etf.ekamp.repositories.AssignmentEntityRepository;
+import org.unibl.etf.ekamp.repositories.CampEntityRepository;
 import org.unibl.etf.ekamp.repositories.CountryEntityRepository;
 import org.unibl.etf.ekamp.repositories.EmployeeEntityRepository;
 import org.unibl.etf.ekamp.services.EmployeeService;
-import org.springframework.jms.core.JmsTemplate;;
+
 
 import org.unibl.etf.ekamp.model.enums.Role;
+
+import java.sql.Date;
+import java.time.LocalDate;
 
 @Service
 @Transactional
@@ -27,15 +33,19 @@ public class EmployeeServiceImpl extends CrudJpaService<EmployeeEntity, Integer>
     private final EmployeeEntityRepository repository;
     private final CountryEntityRepository countryEntityRepository;
     private final PasswordEncoder passwordEncoder;
+    private final AssignmentEntityRepository assignmentEntityRepository;
+    private final CampEntityRepository campEntityRepository;
 
 
 
-    public EmployeeServiceImpl(ModelMapper modelMapper, EmployeeEntityRepository repository, CountryEntityRepository countryEntityRepository, PasswordEncoder passwordEncoder){
+    public EmployeeServiceImpl(ModelMapper modelMapper, EmployeeEntityRepository repository, CountryEntityRepository countryEntityRepository, PasswordEncoder passwordEncoder, AssignmentEntityRepository assignmentEntityRepository, CampEntityRepository campEntityRepository){
 
         super(repository, EmployeeEntity.class, modelMapper);
         this.repository = repository;
         this.countryEntityRepository = countryEntityRepository;
         this.passwordEncoder = passwordEncoder;
+        this.assignmentEntityRepository = assignmentEntityRepository;
+        this.campEntityRepository = campEntityRepository;
     }
 
 //    @Override
@@ -92,6 +102,28 @@ public class EmployeeServiceImpl extends CrudJpaService<EmployeeEntity, Integer>
         employeeEntity.setRole(Role.VOLUNTEER);
         Employee employee = insert(employeeEntity, Employee.class);
         return employee;
+    }
+
+    @Override
+    public Assignment changeAssignment(Integer userId, ChangeAssignmentRequest assignmentRequest) {
+        EmployeeEntity entity = findEntityById(userId);
+        if(entity.getRole() != Role.VOLUNTEER)
+            throw new ForbiddenException();
+        for(AssignmentEntity assignmentEntity : entity.getAssignments()) {
+            if(assignmentEntity.getEndDate() == null) {
+                assignmentEntity.setEndDate(Date.valueOf(LocalDate.now()));
+            }
+        }
+        AssignmentRequest request = new AssignmentRequest();
+        request.setEmployeeId(userId);
+        request.setCampId(assignmentRequest.getCampId());
+        request.setStartDate(assignmentRequest.getStartDate());
+        request.setEndDate(null);
+        AssignmentEntity newAssignment = getModelMapper().map(request, AssignmentEntity.class);
+        assignmentEntityRepository.save(newAssignment);
+        Assignment returnAssignment =  getModelMapper().map(newAssignment, Assignment.class);
+        returnAssignment.setCampName(campEntityRepository.getReferenceById(assignmentRequest.getCampId()).getName());
+        return returnAssignment;
     }
 
     @Override

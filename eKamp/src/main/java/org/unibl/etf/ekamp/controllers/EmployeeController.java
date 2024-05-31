@@ -4,11 +4,10 @@ import jakarta.validation.Valid;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import org.unibl.etf.ekamp.exceptions.ForbiddenException;
+import org.unibl.etf.ekamp.model.dto.Assignment;
 import org.unibl.etf.ekamp.model.dto.Employee;
 import org.unibl.etf.ekamp.model.dto.JwtEmployee;
-import org.unibl.etf.ekamp.model.requests.ChangeEmployeeStatusRequest;
-import org.unibl.etf.ekamp.model.requests.EmployeeRequest;
-import org.unibl.etf.ekamp.model.requests.EmployeeUpdateRequest;
+import org.unibl.etf.ekamp.model.requests.*;
 import org.unibl.etf.ekamp.services.EmployeeService;
 import org.unibl.etf.ekamp.model.enums.Role;
 
@@ -53,11 +52,15 @@ public class EmployeeController {
 
     @PostMapping
     public Employee signUp(@Valid @RequestBody EmployeeRequest request, Authentication authentication) {
-        JwtEmployee jwtEmployee  = (JwtEmployee) authentication.getPrincipal();
-        if(jwtEmployee.getRole() != Role.ADMIN)
-            throw new ForbiddenException();
         return service.signUp(request);
     }
 
+    @PutMapping("/{id}/change-assignment")
+    public Assignment changeAssignment(@PathVariable Integer id, @Valid @RequestBody ChangeAssignmentRequest assignmentRequest, Authentication authentication) {
+        JwtEmployee jwtEmployee = (JwtEmployee) authentication.getPrincipal();
+        if(jwtEmployee.getRole() != Role.ADMIN)
+            throw new ForbiddenException();
+        return service.changeAssignment(id, assignmentRequest);
+    }
 
 }
