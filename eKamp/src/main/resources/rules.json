@@ -7,6 +7,20 @@
         "ADMIN",
         "VOLUNTEER"
       ]
+    },{
+      "methods": [
+      ],
+      "pattern": "/camps",
+      "roles": [
+        "ADMIN"
+      ]
+    },{
+      "methods": [
+      ],
+      "pattern": "/camps/**",
+      "roles": [
+        "ADMIN"
+      ]
     },
     {
       "methods": [
@@ -14,7 +28,6 @@
       ],
       "pattern": "/camps",
       "roles": [
-        "ADMIN",
         "VOLUNTEER"
       ]
     },{
@@ -72,13 +85,19 @@
         "VOLUNTEER"
       ]
     },
-
     {
       "methods": [],
       "pattern": "/places",
       "roles": [
         "ADMIN",
         "VOLUNTEER"
+      ]
+    },
+    {
+      "methods": [],
+      "pattern": "/places/**",
+      "roles": [
+        "ADMIN"
       ]
     },
     {
