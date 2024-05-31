@@ -127,6 +127,14 @@ public class EmployeeServiceImpl extends CrudJpaService<EmployeeEntity, Integer>
     }
 
     @Override
+    public Assignment currentAssignment(Integer id) {
+        EmployeeEntity employeeEntity = findEntityById(id);
+        AssignmentEntity ae = employeeEntity.getAssignments().stream().filter(a -> a.getEndDate() == null).findFirst().get();
+        return getModelMapper().map(ae, Assignment.class);
+
+    }
+
+    @Override
     public void changeStatus(Integer userId, ChangeEmployeeStatusRequest request) {
         EmployeeEntity entity = findEntityById(userId);
         entity.setStatus(getModelMapper().map(request.getAccountStatus(), AccountStatus.class));

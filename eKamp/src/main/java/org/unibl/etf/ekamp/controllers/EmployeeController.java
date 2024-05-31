@@ -63,4 +63,10 @@ public class EmployeeController {
         return service.changeAssignment(id, assignmentRequest);
     }
 
+    @GetMapping("/{id}/assignment")
+    public Assignment currentAssignment(@PathVariable Integer id) {
+        return service.currentAssignment(id);
+    }
+
+
 }

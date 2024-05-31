@@ -13,5 +13,6 @@ public interface EmployeeService extends CrudService<Integer> {
     Employee signUp(EmployeeRequest request);
 
     Assignment changeAssignment(Integer id, ChangeAssignmentRequest assignmentRequest);
+    Assignment currentAssignment(Integer id);
 
 }
