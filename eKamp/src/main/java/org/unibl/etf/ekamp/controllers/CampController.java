@@ -24,7 +24,7 @@ public class CampController extends CrudController<Integer, CampRequest, Camp> {
     }
 
     @GetMapping("/{id}/residence-periods")
-    public List<ResidencePeriod> campResidencePeriods(@PathVariable Integer id) {
+    public List<CampResidencePeriod> campResidencePeriods(@PathVariable Integer id) {
         return campService.campResidencePeriods(id);
     }
 
