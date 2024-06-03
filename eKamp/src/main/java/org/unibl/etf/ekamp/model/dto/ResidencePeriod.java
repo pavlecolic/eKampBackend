@@ -16,7 +16,7 @@ public class ResidencePeriod {
     private String residentFirstName;
     private String residentLastName;
     private String residentJmbg;
-    private Boolean needsHospitalization;
+    private Boolean residentNeedsHospitalisation;
     private String residentEmployeeFirstName;
     private String residentEmployeeLastName;
 }

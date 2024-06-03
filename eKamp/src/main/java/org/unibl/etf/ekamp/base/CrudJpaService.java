@@ -40,6 +40,7 @@ public class CrudJpaService<E extends BaseEntity<ID>, ID extends Serializable> i
     public <T> Page<T> findAll(Pageable page, Class<T> resultDtoClass) {
         return repository.findAll(page).map(e -> modelMapper.map(e, resultDtoClass));
     }
+
     @Override
     public <T> T findById(ID id, Class<T> resultDtoClass) {
         return modelMapper.map(findEntityById(id), resultDtoClass);
