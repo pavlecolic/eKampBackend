@@ -17,4 +17,6 @@ public class ResidencePeriodController extends CrudController<Integer, Residence
     protected ResidencePeriodController( ResidencePeriodService crudService) {
         super(ResidencePeriod.class, crudService);
     }
+
+
 }

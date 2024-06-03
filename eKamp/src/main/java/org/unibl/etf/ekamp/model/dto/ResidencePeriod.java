@@ -10,12 +10,13 @@ import java.sql.Timestamp;
 public class ResidencePeriod {
 
     private Integer id;
-
     private Timestamp startDate;
-
     private Timestamp endDate;
-
     private String campName;
-
+    private String residentFirstName;
+    private String residentLastName;
     private String residentJmbg;
+    private Boolean needsHospitalization;
+    private String residentEmployeeFirstName;
+    private String residentEmployeeLastName;
 }

@@ -1,8 +1,6 @@
 package org.unibl.etf.ekamp.controllers;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.unibl.etf.ekamp.base.CrudController;
 import org.unibl.etf.ekamp.base.CrudService;
 import org.unibl.etf.ekamp.model.dto.Resident;
@@ -16,4 +14,7 @@ public class ResidentController extends CrudController<Integer, ResidentRequest,
     protected ResidentController(ResidentService residentService) {
         super(Resident.class, residentService);
     }
+
+//    @GetMapping("{id}/resident-periods")
+//    public ResidentResidencePeriods getResidentResidencePeriods()
 }

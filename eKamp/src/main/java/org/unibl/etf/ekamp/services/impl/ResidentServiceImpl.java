@@ -16,4 +16,7 @@ public class ResidentServiceImpl extends CrudJpaService<ResidentEntity, Integer>
     public ResidentServiceImpl(ResidentEntityRepository repository, ModelMapper modelMapper) {
         super(repository, ResidentEntity.class, modelMapper);
     }
+
+
+
 }

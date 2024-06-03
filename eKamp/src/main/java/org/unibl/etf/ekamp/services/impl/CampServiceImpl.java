@@ -2,17 +2,17 @@ package org.unibl.etf.ekamp.services.impl;
 
 import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import org.unibl.etf.ekamp.base.CrudJpaService;
 import org.unibl.etf.ekamp.model.dto.Camp;
-import org.unibl.etf.ekamp.model.entities.AssignmentEntity;
+import org.unibl.etf.ekamp.model.dto.ResidencePeriod;
 import org.unibl.etf.ekamp.model.entities.CampEntity;
-import org.unibl.etf.ekamp.model.entities.EmployeeEntity;
+import org.unibl.etf.ekamp.model.entities.ResidencePeriodEntity;
 import org.unibl.etf.ekamp.repositories.CampEntityRepository;
-import org.unibl.etf.ekamp.services.AssignmentService;
 import org.unibl.etf.ekamp.services.CampService;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -37,5 +37,16 @@ public class CampServiceImpl extends CrudJpaService<CampEntity, Integer> impleme
             return camp;
         }
         return null;
+    }
+
+    @Override
+    public List<ResidencePeriod> campResidencePeriods(Integer id) {
+        CampEntity campEntity = getRepository().getReferenceById(id);
+        List<ResidencePeriodEntity> residencePeriodEntities = campEntity.getResidencePeriods();
+        List<ResidencePeriod> residencePeriods = new ArrayList<>();
+        for(ResidencePeriodEntity residencePeriodEntity : residencePeriodEntities) {
+            residencePeriods.add(getModelMapper().map(residencePeriodEntity, ResidencePeriod.class));
+        }
+        return residencePeriods;
     }
 }

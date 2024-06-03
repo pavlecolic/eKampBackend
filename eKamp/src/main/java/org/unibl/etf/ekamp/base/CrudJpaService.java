@@ -1,6 +1,6 @@
 package org.unibl.etf.ekamp.base;
 
-import jakarta.persistence.EntityManager;
+import  jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 import lombok.Getter;

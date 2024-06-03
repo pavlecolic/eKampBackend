@@ -1,15 +1,15 @@
 package org.unibl.etf.ekamp.controllers;
 
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.unibl.etf.ekamp.base.CrudController;
-import org.unibl.etf.ekamp.base.CrudService;
 import org.unibl.etf.ekamp.model.dto.Camp;
+import org.unibl.etf.ekamp.model.dto.CampResidencePeriod;
+import org.unibl.etf.ekamp.model.dto.ResidencePeriod;
 import org.unibl.etf.ekamp.model.requests.CampRequest;
 import org.unibl.etf.ekamp.services.CampService;
-import org.unibl.etf.ekamp.services.EmployeeService;
 
-import java.util.Map;
+import java.util.List;
+
 
 @RestController
 @CrossOrigin
@@ -23,6 +23,10 @@ public class CampController extends CrudController<Integer, CampRequest, Camp> {
         this.campService= crudService;
     }
 
+    @GetMapping("/{id}/residence-periods")
+    public List<ResidencePeriod> campResidencePeriods(@PathVariable Integer id) {
+        return campService.campResidencePeriods(id);
+    }
 
 
     /*@CrossOrigin

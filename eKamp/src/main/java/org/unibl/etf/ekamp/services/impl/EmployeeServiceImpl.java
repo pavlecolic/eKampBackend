@@ -140,5 +140,4 @@ public class EmployeeServiceImpl extends CrudJpaService<EmployeeEntity, Integer>
         entity.setStatus(getModelMapper().map(request.getAccountStatus(), AccountStatus.class));
         repository.saveAndFlush(entity);
     }
-
 }

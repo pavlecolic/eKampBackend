@@ -63,12 +63,29 @@
     },
     {
       "methods": [
+        "GET"
+      ],
+      "pattern": "/municipalities/**",
+      "roles": [
+        "ADMIN",
+        "VOLUNTEER"
+      ]
+    },
+    {
+      "methods": [
         "GET",
         "POST",
         "PUT",
         "DELETE"
       ],
       "pattern": "/employees",
+      "roles": [
+        "ADMIN"
+      ]
+    },
+    {
+      "methods": [],
+      "pattern": "/employees/**",
       "roles": [
         "ADMIN"
       ]
@@ -143,14 +160,6 @@
       "roles": [
         "ADMIN",
         "VOLUNTEER"
-      ]
-    },
-
-    {
-      "methods": [],
-      "pattern": "/employees/**",
-      "roles": [
-        "ADMIN"
       ]
     }
 
