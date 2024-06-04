@@ -30,6 +30,13 @@ public class WebSecurityConfig {
     private final AuthorizationFilter authorizationFilter;
     private final JwtEmployeeDetailsService jwtEmployeeDetailsService;
 
+    private static final String[] SWAGGER_WHITELIST = {
+            "/swagger-ui/**",
+            "/v3/api-docs/**",
+            "/swagger-resources/**",
+            "/swagger-resources"
+    };
+
     public WebSecurityConfig(AuthorizationFilter authorizationFilter, JwtEmployeeDetailsService jwtEmployeeDetailsService) {
         this.authorizationFilter = authorizationFilter;
         this.jwtEmployeeDetailsService = jwtEmployeeDetailsService;
@@ -67,6 +74,9 @@ public class WebSecurityConfig {
             else for (String method : rule.getMethods()) {
                 interceptor.requestMatchers(HttpMethod.valueOf(method), rule.getPattern()).hasAnyAuthority(rule.getRoles().toArray(String[]::new));
             }
+        }
+        for(String path : SWAGGER_WHITELIST) {
+            interceptor.requestMatchers(path).permitAll();
         }
         interceptor.anyRequest().denyAll();
     }
