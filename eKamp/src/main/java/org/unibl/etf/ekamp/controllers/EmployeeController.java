@@ -7,6 +7,7 @@ import org.unibl.etf.ekamp.exceptions.ForbiddenException;
 import org.unibl.etf.ekamp.model.dto.Assignment;
 import org.unibl.etf.ekamp.model.dto.Employee;
 import org.unibl.etf.ekamp.model.dto.JwtEmployee;
+import org.unibl.etf.ekamp.model.dto.UserMessages;
 import org.unibl.etf.ekamp.model.requests.*;
 import org.unibl.etf.ekamp.services.EmployeeService;
 import org.unibl.etf.ekamp.model.enums.Role;
@@ -68,5 +69,14 @@ public class EmployeeController {
         return service.currentAssignment(id);
     }
 
+    @GetMapping("/{id}/messages")
+    public List<UserMessages> getUserMessages(@PathVariable Integer id) {
+        return service.getUserMessages(id);
+    }
+
+    @PatchMapping("/{employee_id}/messages/{message_id}")
+    public void setReadMessage(@PathVariable("employee_id") Integer employeeId, @PathVariable("message_id") Integer messageId) {
+        service.setReadMessage(employeeId, messageId);
+    }
 
 }

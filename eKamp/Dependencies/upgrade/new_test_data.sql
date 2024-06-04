@@ -194,3 +194,19 @@ INSERT INTO `eKamp`.`message` (`content`, `time_created`, `employee_person_id`) 
 ('Please follow the camp rules.', '2024-02-01 13:00:00', 5),
 ('Emergency drill at 3 PM.', '2024-03-01 14:00:00', 6);
 
+INSERT INTO `eKamp`.`user_messages` (`message_id`, `employee_person_id`, `read_at`) VALUES 
+(1, 4, '2024-12-15 20:00:00'),
+(2, 4, '2024-12-15 20:00:10'),
+(3, 4, null),
+(1, 5, '2024-12-15 21:00:00'),
+(2, 5, null),
+(3, 5, '2024-12-15 21:00:10'),
+(1, 6, null),
+(2, 6, null),
+(3, 6, '2024-12-15 21:00:10'),
+(1, 7, null),
+(2, 7, null),
+(3, 7, null);
+
+
+

@@ -10,21 +10,25 @@ import org.unibl.etf.ekamp.exceptions.ConflictException;
 import org.unibl.etf.ekamp.exceptions.ForbiddenException;
 import org.unibl.etf.ekamp.model.dto.Assignment;
 import org.unibl.etf.ekamp.model.dto.Employee;
+import org.unibl.etf.ekamp.model.dto.UserMessages;
 import org.unibl.etf.ekamp.model.entities.AssignmentEntity;
 import org.unibl.etf.ekamp.model.entities.EmployeeEntity;
+import org.unibl.etf.ekamp.model.entities.UserMessagesEntity;
+import org.unibl.etf.ekamp.model.entities.UserMessagesEntityId;
 import org.unibl.etf.ekamp.model.enums.AccountStatus;
 import org.unibl.etf.ekamp.model.requests.*;
-import org.unibl.etf.ekamp.repositories.AssignmentEntityRepository;
-import org.unibl.etf.ekamp.repositories.CampEntityRepository;
-import org.unibl.etf.ekamp.repositories.CountryEntityRepository;
-import org.unibl.etf.ekamp.repositories.EmployeeEntityRepository;
+import org.unibl.etf.ekamp.repositories.*;
 import org.unibl.etf.ekamp.services.EmployeeService;
 
 
 import org.unibl.etf.ekamp.model.enums.Role;
 
 import java.sql.Date;
+import java.sql.Timestamp;
+import java.time.Instant;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @Transactional
@@ -35,10 +39,11 @@ public class EmployeeServiceImpl extends CrudJpaService<EmployeeEntity, Integer>
     private final PasswordEncoder passwordEncoder;
     private final AssignmentEntityRepository assignmentEntityRepository;
     private final CampEntityRepository campEntityRepository;
+    private final UserMessagesRepository userMessagesRepository;
 
 
 
-    public EmployeeServiceImpl(ModelMapper modelMapper, EmployeeEntityRepository repository, CountryEntityRepository countryEntityRepository, PasswordEncoder passwordEncoder, AssignmentEntityRepository assignmentEntityRepository, CampEntityRepository campEntityRepository){
+    public EmployeeServiceImpl(ModelMapper modelMapper, EmployeeEntityRepository repository, CountryEntityRepository countryEntityRepository, PasswordEncoder passwordEncoder, AssignmentEntityRepository assignmentEntityRepository, CampEntityRepository campEntityRepository, UserMessagesRepository userMessagesRepository){
 
         super(repository, EmployeeEntity.class, modelMapper);
         this.repository = repository;
@@ -46,6 +51,7 @@ public class EmployeeServiceImpl extends CrudJpaService<EmployeeEntity, Integer>
         this.passwordEncoder = passwordEncoder;
         this.assignmentEntityRepository = assignmentEntityRepository;
         this.campEntityRepository = campEntityRepository;
+        this.userMessagesRepository = userMessagesRepository;
     }
 
 //    @Override
@@ -139,5 +145,23 @@ public class EmployeeServiceImpl extends CrudJpaService<EmployeeEntity, Integer>
         EmployeeEntity entity = findEntityById(userId);
         entity.setStatus(getModelMapper().map(request.getAccountStatus(), AccountStatus.class));
         repository.saveAndFlush(entity);
+    }
+
+    @Override
+    public List<UserMessages> getUserMessages(Integer id) {
+        List<UserMessagesEntity> userMessagesEntities = userMessagesRepository.getAllByEmployeeId(id);
+        List<UserMessages> returnMessages = new ArrayList<>();
+        for(UserMessagesEntity userMessagesEntity : userMessagesEntities) {
+            returnMessages.add(getModelMapper().map(userMessagesEntity, UserMessages.class));
+        }
+        return returnMessages;
+    }
+
+    @Override
+    public void setReadMessage(Integer employeeId, Integer messageId) {
+        UserMessagesEntity userMessage = userMessagesRepository.getReferenceById(new UserMessagesEntityId(messageId, employeeId));
+        if(userMessage.getReadAt() == null) {
+            userMessage.setReadAt(Timestamp.from(Instant.now()));
+        }
     }
 }
