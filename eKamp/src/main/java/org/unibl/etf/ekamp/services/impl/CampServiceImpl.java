@@ -5,7 +5,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.unibl.etf.ekamp.base.CrudJpaService;
 import org.unibl.etf.ekamp.model.dto.Camp;
-import org.unibl.etf.ekamp.model.dto.ResidencePeriod;
+import org.unibl.etf.ekamp.model.dto.CampResidencePeriod;
 import org.unibl.etf.ekamp.model.entities.CampEntity;
 import org.unibl.etf.ekamp.model.entities.ResidencePeriodEntity;
 import org.unibl.etf.ekamp.repositories.CampEntityRepository;
@@ -40,12 +40,12 @@ public class CampServiceImpl extends CrudJpaService<CampEntity, Integer> impleme
     }
 
     @Override
-    public List<ResidencePeriod> campResidencePeriods(Integer id) {
+    public List<CampResidencePeriod> campResidencePeriods(Integer id) {
         CampEntity campEntity = getRepository().getReferenceById(id);
         List<ResidencePeriodEntity> residencePeriodEntities = campEntity.getResidencePeriods();
-        List<ResidencePeriod> residencePeriods = new ArrayList<>();
+        List<CampResidencePeriod> residencePeriods = new ArrayList<>();
         for(ResidencePeriodEntity residencePeriodEntity : residencePeriodEntities) {
-            residencePeriods.add(getModelMapper().map(residencePeriodEntity, ResidencePeriod.class));
+            residencePeriods.add(getModelMapper().map(residencePeriodEntity, CampResidencePeriod.class));
         }
         return residencePeriods;
     }

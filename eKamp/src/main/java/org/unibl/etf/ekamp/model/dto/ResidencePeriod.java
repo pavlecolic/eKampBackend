@@ -16,7 +16,4 @@ public class ResidencePeriod {
     private String residentFirstName;
     private String residentLastName;
     private String residentJmbg;
-    private Boolean needsHospitalization;
-    private String residentEmployeeFirstName;
-    private String residentEmployeeLastName;
 }

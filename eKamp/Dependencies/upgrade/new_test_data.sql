@@ -12,6 +12,7 @@ INSERT INTO `eKamp`.`person` (`first_name`, `last_name`, `date_of_birth`, `sex`,
 ('Michael', 'Johnson', '1985-04-04', 'M', '4567890123456', 1),
 ('Emily', 'Taylor', '1978-05-05', 'F', '5678901234567', 2),
 ('David', 'Williams', '1995-06-06', 'M', '6789012345678', 3),
+('Dejan', 'Ikic', '1999-11-11', 'M', '1111111111222', 1),
 ('Sarah', 'Brown', '1982-07-07', 'F', '7890123456789', 1),
 ('Robert', 'Jones', '1992-08-08', 'M', '8901234567890', 2),
 ('Laura', 'Clark', '1987-09-09', 'F', '9012345678901', 3),
@@ -81,14 +82,14 @@ INSERT INTO `eKamp`.`person` (`first_name`, `last_name`, `date_of_birth`, `sex`,
 INSERT INTO `eKamp`.`employee` (`person_id`, `username`, `password`, `is_admin`, `is_active`) VALUES 
 (4, 'michaeljohnson', '$2y$10$BEifFhq2TcHYEv7Q9B2Fme.uHc9FKE6O883K1.rEnGAsWyGLQ.93u', 1, 1),
 (5, 'emilytaylor', '$2y$10$CrZclESnFMWQcigKHeNqt.t4sEUmOwQvF1OwjKPrE0AMR/TDG1eQ6', 0, 1),
-(6, 'davidwilliams', '$2y$10$jeU92LgU/cZ/hdv38XOr2eCWT3/WOKckq3KJha23tBKaSd4nZVG06', 0, 1);
+(6, 'davidwilliams', '$2y$10$jeU92LgU/cZ/hdv38XOr2eCWT3/WOKckq3KJha23tBKaSd4nZVG06', 0, 1),
+(7, 'dikic',  '$2y$10$jeU92LgU/cZ/hdv38XOr2eCWT3/WOKckq3KJha23tBKaSd4nZVG06', 0, 1);
 
 -- Insert data into resident table with different residents
 INSERT INTO `eKamp`.`resident` (`person_id`, `needs_hospitalisation`, `employee_person_id`) VALUES 
 (1, 0, 5),
 (2, 1, 6),
 (3, 0, 4),
-(7, 1, 6),
 (8, 0, 4),
 (9, 1, 5),
 (10, 0, 6),
@@ -122,17 +123,16 @@ INSERT INTO `eKamp`.`camp` (`name`, `place_id`, `camp_status_id`, `capacity`) VA
 ('Camp Gamma', 3, 3, 150);
 
 -- Insert data into assignment table
-INSERT INTO `eKamp`.`assignment` (`start_date`, `end_date`, `employee_person_id`, `camp_id`) VALUES 
-('2024-01-01', '2024-12-31', 4, 1),
+INSERT INTO `eKamp`.`assignment` (`start_date`, `end_date`, `employee_person_id`, `camp_id`) VALUES
 ('2024-02-01', '2024-11-30', 5, 2),
-('2024-03-01', '2024-10-31', 6, 3);
+('2024-03-01', '2024-10-31', 6, 3),
+('2024-03-01', '2024-10-31', 7, 1);
 
 -- Insert data into residence_period table with additional residents
 INSERT INTO `eKamp`.`residence_period` (`start_date`, `end_date`, `camp_id`, `resident_person_id`) VALUES 
 ('2024-07-01 08:00:00', '2024-12-01 18:00:00', 1, 1),
     ('2024-08-01 09:00:00', '2024-12-05 19:00:00', 1, 2),
     ('2024-09-01 10:00:00', '2024-12-10 20:00:00', 1, 3),
-    ('2024-07-02 08:00:00', '2024-12-02 18:00:00', 1, 7),
     ('2024-08-02 09:00:00', '2024-12-06 19:00:00', 1, 8),
     ('2024-09-02 10:00:00', '2024-12-11 20:00:00', 1, 9),
     ('2024-07-03 08:00:00', '2024-12-03 18:00:00', 1, 10),
@@ -193,3 +193,20 @@ INSERT INTO `eKamp`.`message` (`content`, `time_created`, `employee_person_id`) 
 ('Welcome to Camp Alpha!', '2024-01-01 12:00:00', 4),
 ('Please follow the camp rules.', '2024-02-01 13:00:00', 5),
 ('Emergency drill at 3 PM.', '2024-03-01 14:00:00', 6);
+
+INSERT INTO `eKamp`.`user_messages` (`message_id`, `employee_person_id`, `read_at`) VALUES 
+(1, 4, '2024-12-15 20:00:00'),
+(2, 4, '2024-12-15 20:00:10'),
+(3, 4, null),
+(1, 5, '2024-12-15 21:00:00'),
+(2, 5, null),
+(3, 5, '2024-12-15 21:00:10'),
+(1, 6, null),
+(2, 6, null),
+(3, 6, '2024-12-15 21:00:10'),
+(1, 7, null),
+(2, 7, null),
+(3, 7, null);
+
+
+

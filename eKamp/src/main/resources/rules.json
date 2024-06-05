@@ -21,6 +21,16 @@
       "pattern": "/camps/**",
       "roles": [
         "ADMIN",
+
+        "VOLUNTEER"
+      ]
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "pattern": "/camps",
+      "roles": [
         "VOLUNTEER"
       ]
     },
