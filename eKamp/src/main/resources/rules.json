@@ -12,34 +12,17 @@
       ],
       "pattern": "/camps",
       "roles": [
-        "ADMIN"
+        "ADMIN",
+        "VOLUNTEER"
       ]
     },{
       "methods": [
       ],
       "pattern": "/camps/**",
       "roles": [
-        "ADMIN"
-      ]
-    },
-    {
-      "methods": [
-        "GET"
-      ],
-      "pattern": "/camps",
-      "roles": [
+        "ADMIN",
         "VOLUNTEER"
       ]
-    },
-    {
-    "methods": [
-      "GET"
-    ],
-    "pattern": "/camps/**",
-    "roles": [
-      "ADMIN",
-      "VOLUNTEER"
-    ]
     },
     {
       "methods": [
