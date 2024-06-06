@@ -8,5 +8,6 @@ import lombok.EqualsAndHashCode;
 public class Resident extends Person {
 
     private Boolean needsHospitalisation;
-    private String employeeJmbg;
+    private String employeeFirstName;
+    private String employeeLastName;
 }
