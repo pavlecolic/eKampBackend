@@ -91,6 +91,18 @@
         "ADMIN"
       ]
     },
+    {
+      "methods": ["GET"],
+      "pattern": "/employees/**",
+      "roles": [
+        "VOLUNTEER"
+      ]
+    },{
+      "methods": ["GET", "POST"],
+      "pattern": "/employees/**/messages",
+      "roles": ["ADMIN", "VOLUNTEER"]
+    },
+
 
     {
       "methods": [
