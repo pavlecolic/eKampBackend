@@ -60,8 +60,16 @@
       ],
       "pattern": "/municipalities/**",
       "roles": [
-        "ADMIN",
         "VOLUNTEER"
+      ]
+    },
+
+    {
+      "methods": [
+      ],
+      "pattern": "/municipalities/**",
+      "roles": [
+        "ADMIN"
       ]
     },
     {
@@ -90,10 +98,31 @@
       ],
       "pattern": "/countries",
       "roles": [
-        "ADMIN",
-        "VOLUNTEER"
+        "VOLUNTEER",
+        "ADMIN"
       ]
     },
+
+
+    {
+      "methods": [
+      ],
+      "pattern": "/countries",
+      "roles": [
+        "ADMIN"
+      ]
+    },
+
+
+    {
+      "methods": [
+      ],
+      "pattern": "/countries/**",
+      "roles": [
+        "ADMIN"
+      ]
+    },
+
 
     {
       "methods": [
