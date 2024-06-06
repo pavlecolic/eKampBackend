@@ -1,8 +1,10 @@
 package org.unibl.etf.ekamp.controllers;
 
 import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.unibl.etf.ekamp.base.CrudController;
+import org.unibl.etf.ekamp.exceptions.NotFoundException;
 import org.unibl.etf.ekamp.model.dto.Resident;
 import org.unibl.etf.ekamp.model.requests.DepartureRequest;
 import org.unibl.etf.ekamp.model.requests.ResidentRequest;
@@ -17,6 +19,11 @@ public class ResidentController extends CrudController<Integer, ResidentRequest,
     protected ResidentController(ResidentService residentService) {
         super(Resident.class, residentService);
         this.residentService = residentService;
+    }
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public Resident insert(@RequestBody ResidentRequest request) throws NotFoundException {
+        return residentService.addResident(request);
     }
     @PatchMapping("depart")
     public void depart(@Valid @RequestBody DepartureRequest request) {

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.unibl.etf.ekamp.base.CrudJpaService;
 import org.unibl.etf.ekamp.exceptions.ConflictException;
 import org.unibl.etf.ekamp.exceptions.ForbiddenException;
+import org.unibl.etf.ekamp.exceptions.NotFoundException;
 import org.unibl.etf.ekamp.model.dto.Assignment;
 import org.unibl.etf.ekamp.model.dto.Employee;
 import org.unibl.etf.ekamp.model.dto.UserMessages;
@@ -135,8 +136,10 @@ public class EmployeeServiceImpl extends CrudJpaService<EmployeeEntity, Integer>
     @Override
     public Assignment currentAssignment(Integer id) {
         EmployeeEntity employeeEntity = findEntityById(id);
-        AssignmentEntity ae = employeeEntity.getAssignments().stream().filter(a -> a.getEndDate() == null).findFirst().get();
-        return getModelMapper().map(ae, Assignment.class);
+        AssignmentEntity ae = employeeEntity.getAssignments().stream().filter(a -> a.getEndDate() == null).findFirst().orElse(null);
+        if(ae != null)
+            return getModelMapper().map(ae, Assignment.class);
+        return null;
 
     }
 
