@@ -1,14 +1,13 @@
 package org.unibl.etf.ekamp.controllers;
 
-import org.springframework.http.ResponseEntity;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 import org.unibl.etf.ekamp.base.CrudController;
-import org.unibl.etf.ekamp.model.dto.ResidencePeriod;
 import org.unibl.etf.ekamp.model.dto.Resident;
+import org.unibl.etf.ekamp.model.requests.DepartureRequest;
 import org.unibl.etf.ekamp.model.requests.ResidentRequest;
 import org.unibl.etf.ekamp.services.ResidentService;
 
-import java.util.List;
 
 @RestController
 @CrossOrigin
@@ -19,9 +18,9 @@ public class ResidentController extends CrudController<Integer, ResidentRequest,
         super(Resident.class, residentService);
         this.residentService = residentService;
     }
-    @PatchMapping("{id}/depart")
-    public void depart(@PathVariable Integer id) {
-        residentService.depart(id);
+    @PatchMapping("depart")
+    public void depart(@Valid @RequestBody DepartureRequest request) {
+        residentService.depart(request);
     }
 
 //    @GetMapping
