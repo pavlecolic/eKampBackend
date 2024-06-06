@@ -19,6 +19,10 @@ public class ResidentController extends CrudController<Integer, ResidentRequest,
         super(Resident.class, residentService);
         this.residentService = residentService;
     }
+    @PatchMapping("{id}/depart")
+    public void depart(@PathVariable Integer id) {
+        residentService.depart(id);
+    }
 
 //    @GetMapping
 //    public ResponseEntity<List<Resident>> getAll(

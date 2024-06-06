@@ -3,7 +3,6 @@ package org.unibl.etf.ekamp.controllers;
 import org.springframework.web.bind.annotation.*;
 import org.unibl.etf.ekamp.base.CrudController;
 import org.unibl.etf.ekamp.model.dto.Camp;
-import org.unibl.etf.ekamp.model.dto.CampResidencePeriod;
 import org.unibl.etf.ekamp.model.dto.ResidencePeriod;
 import org.unibl.etf.ekamp.model.requests.CampRequest;
 import org.unibl.etf.ekamp.services.CampService;
@@ -24,7 +23,7 @@ public class CampController extends CrudController<Integer, CampRequest, Camp> {
     }
 
     @GetMapping("/{id}/residence-periods")
-    public List<CampResidencePeriod> campResidencePeriods(@PathVariable Integer id) {
+    public List<ResidencePeriod> campResidencePeriods(@PathVariable Integer id) {
         return campService.campResidencePeriods(id);
     }
 

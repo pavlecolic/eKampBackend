@@ -27,7 +27,6 @@ public class ResidencePeriodServiceImpl extends CrudJpaService<ResidencePeriodEn
         super(repository, ResidencePeriodEntity.class, modelMapper);
         this.residencePeriodRepository = repository;
     }
-
     @Override
     public List<ResidencePeriod> getResidentResidencePeriods(Integer id) {
         return residencePeriodRepository.findByResidentId(id).stream()
