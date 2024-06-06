@@ -6,12 +6,14 @@ import org.springframework.stereotype.Service;
 import org.unibl.etf.ekamp.base.CrudJpaService;
 import org.unibl.etf.ekamp.model.entities.ResidencePeriodEntity;
 import org.unibl.etf.ekamp.model.entities.ResidentEntity;
+import org.unibl.etf.ekamp.model.requests.DepartureRequest;
 import org.unibl.etf.ekamp.repositories.ResidencePeriodRepository;
 import org.unibl.etf.ekamp.repositories.ResidentEntityRepository;
 import org.unibl.etf.ekamp.services.ResidentService;
 
 import java.sql.Timestamp;
 import java.time.Instant;
+import java.util.List;
 
 @Service
 @Transactional
@@ -24,9 +26,10 @@ public class ResidentServiceImpl extends CrudJpaService<ResidentEntity, Integer>
         this.residencePeriodRepository = residencePeriodRepository;
     }
 
-    public void depart(Integer id) {
-        ResidentEntity residentEntity = getRepository().getReferenceById(id);
-        // TODO: zavrsiti
-
+    public void depart(DepartureRequest request) {
+        List<ResidencePeriodEntity> residencePeriodEntityList = residencePeriodRepository.findByResidentIdAndCampId(request.getResidentId(), request.getCampId());
+        residencePeriodEntityList.stream()
+                .filter(rp -> rp.getEndDate() == null)
+                .forEach(rp -> rp.setEndDate(Timestamp.from(Instant.now())));
     }
 }
