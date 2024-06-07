@@ -4,8 +4,6 @@ import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.unibl.etf.ekamp.base.CrudJpaService;
-import org.unibl.etf.ekamp.model.dto.Assignment;
-import org.unibl.etf.ekamp.model.dto.ResidencePeriod;
 import org.unibl.etf.ekamp.model.dto.Resident;
 import org.unibl.etf.ekamp.model.dto.SimpleResidencePeriod;
 import org.unibl.etf.ekamp.model.entities.AssignmentEntity;
@@ -61,7 +59,9 @@ public class ResidentServiceImpl extends CrudJpaService<ResidentEntity, Integer>
         entity = getRepository().saveAndFlush(entity);
         getEntityManager().refresh(entity);
         simpleResidencePeriod.setResidentId(entity.getId());
-        SimpleResidencePeriod srp = residencePeriodService.insert(getModelMapper().map(simpleResidencePeriod, ResidencePeriodEntity.class), SimpleResidencePeriod.class );
+        SimpleResidencePeriod srp = residencePeriodService.insert(getModelMapper().map(simpleResidencePeriod, ResidencePeriodEntity.class), SimpleResidencePeriod.class);
         return getModelMapper().map(entity, Resident.class);
+
+
     }
 }

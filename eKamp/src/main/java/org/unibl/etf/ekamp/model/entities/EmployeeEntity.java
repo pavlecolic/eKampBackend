@@ -36,7 +36,7 @@ public class EmployeeEntity extends PersonEntity implements BaseEntity<Integer> 
     @OneToMany(mappedBy = "employee")
     private List<ResidentEntity> residents;
 
-    @OneToMany(mappedBy = "employee")
+    @OneToMany(mappedBy = "employee", fetch = FetchType.LAZY)
     private List<MessageEntity> messages;
 
 

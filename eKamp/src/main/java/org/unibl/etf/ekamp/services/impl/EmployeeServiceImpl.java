@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.unibl.etf.ekamp.base.CrudJpaService;
 import org.unibl.etf.ekamp.exceptions.ConflictException;
 import org.unibl.etf.ekamp.exceptions.ForbiddenException;
-import org.unibl.etf.ekamp.exceptions.NotFoundException;
 import org.unibl.etf.ekamp.model.dto.Assignment;
 import org.unibl.etf.ekamp.model.dto.Employee;
 import org.unibl.etf.ekamp.model.dto.UserMessages;

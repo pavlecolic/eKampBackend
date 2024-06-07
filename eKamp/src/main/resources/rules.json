@@ -107,16 +107,6 @@
     {
       "methods": [
       ],
-      "pattern": "/countries",
-      "roles": [
-        "ADMIN"
-      ]
-    },
-
-
-    {
-      "methods": [
-      ],
       "pattern": "/countries/**",
       "roles": [
         "ADMIN"
@@ -126,10 +116,17 @@
 
     {
       "methods": [
-        "GET",
-        "POST"
       ],
       "pattern": "/messages",
+      "roles": [
+        "ADMIN",
+        "VOLUNTEER"
+      ]
+    },
+    {
+      "methods": [
+      ],
+      "pattern": "/messages/**",
       "roles": [
         "ADMIN",
         "VOLUNTEER"

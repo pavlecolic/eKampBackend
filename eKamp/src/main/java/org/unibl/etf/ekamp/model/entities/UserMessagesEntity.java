@@ -1,6 +1,6 @@
 package org.unibl.etf.ekamp.model.entities;
 
-import com.sun.jdi.IntegerType;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.unibl.etf.ekamp.base.BaseEntity;
@@ -21,11 +21,13 @@ public class UserMessagesEntity implements BaseEntity<UserMessagesEntityId> {
     @ManyToOne
     @MapsId("messageId")
     @JoinColumn(name = "message_id", referencedColumnName = "id")
+    @JsonBackReference
     private MessageEntity message;
 
     @ManyToOne
     @MapsId("employeePersonId")
     @JoinColumn(name = "employee_person_id", referencedColumnName = "person_id")
+    @JsonBackReference
     private EmployeeEntity employee;
 
 }
