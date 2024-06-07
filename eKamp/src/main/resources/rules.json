@@ -97,17 +97,16 @@
       "roles": [
         "VOLUNTEER"
       ]
-    },{
+    },
+    {
       "methods": ["GET", "POST"],
-      "pattern": "/employees/**/messages",
+      "pattern": "/employees/*/messages",
       "roles": ["ADMIN", "VOLUNTEER"]
     },
 
 
     {
-      "methods": [
-        "GET"
-      ],
+      "methods": [],
       "pattern": "/countries",
       "roles": [
         "VOLUNTEER",
@@ -117,13 +116,15 @@
 
 
     {
-      "methods": [
-      ],
+      "methods": [],
       "pattern": "/countries/**",
       "roles": [
+        "VOLUNTEER",
         "ADMIN"
       ]
     },
+
+
 
 
     {
