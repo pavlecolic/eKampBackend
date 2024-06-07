@@ -2,6 +2,8 @@ package org.unibl.etf.ekamp.services.impl;
 
 import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.unibl.etf.ekamp.base.CrudJpaService;
 import org.unibl.etf.ekamp.model.dto.Resident;
@@ -63,5 +65,10 @@ public class ResidentServiceImpl extends CrudJpaService<ResidentEntity, Integer>
         return getModelMapper().map(entity, Resident.class);
 
 
+    }
+
+    @Override
+    public Page<Resident> findAll(Pageable pageable) {
+        return findAll(pageable, Resident.class);
     }
 }
