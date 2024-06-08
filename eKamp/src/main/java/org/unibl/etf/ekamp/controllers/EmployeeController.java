@@ -69,6 +69,11 @@ public class EmployeeController {
         return service.currentAssignment(id);
     }
 
+    @GetMapping("/{id}/assignments")
+    public List<Assignment> currentAssignments(@PathVariable Integer id) {
+        return service.currentAssignments(id);
+    }
+
     @GetMapping("/{id}/messages")
     public List<UserMessages> getUserMessages(@PathVariable Integer id) {
         return service.getUserMessages(id);

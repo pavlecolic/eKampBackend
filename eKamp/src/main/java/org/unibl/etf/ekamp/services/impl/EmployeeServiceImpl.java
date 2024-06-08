@@ -2,6 +2,7 @@ package org.unibl.etf.ekamp.services.impl;
 
 import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
+import org.springframework.expression.spel.ast.Assign;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -112,6 +113,7 @@ public class EmployeeServiceImpl extends CrudJpaService<EmployeeEntity, Integer>
 
     @Override
     public Assignment changeAssignment(Integer userId, ChangeAssignmentRequest assignmentRequest) {
+
         EmployeeEntity entity = findEntityById(userId);
         if(entity.getRole() != Role.VOLUNTEER)
             throw new ForbiddenException();
@@ -120,16 +122,20 @@ public class EmployeeServiceImpl extends CrudJpaService<EmployeeEntity, Integer>
                 assignmentEntity.setEndDate(Date.valueOf(LocalDate.now()));
             }
         }
-        AssignmentRequest request = new AssignmentRequest();
-        request.setEmployeeId(userId);
-        request.setCampId(assignmentRequest.getCampId());
-        request.setStartDate(assignmentRequest.getStartDate());
-        request.setEndDate(null);
-        AssignmentEntity newAssignment = getModelMapper().map(request, AssignmentEntity.class);
-        assignmentEntityRepository.save(newAssignment);
-        Assignment returnAssignment =  getModelMapper().map(newAssignment, Assignment.class);
-        returnAssignment.setCampName(campEntityRepository.getReferenceById(assignmentRequest.getCampId()).getName());
-        return returnAssignment;
+
+        if(!assignmentRequest.getCampId().equals(0)) {
+            AssignmentRequest request = new AssignmentRequest();
+            request.setEmployeeId(userId);
+            request.setCampId(assignmentRequest.getCampId());
+            request.setStartDate(assignmentRequest.getStartDate());
+            request.setEndDate(null);
+            AssignmentEntity newAssignment = getModelMapper().map(request, AssignmentEntity.class);
+            assignmentEntityRepository.save(newAssignment);
+            Assignment returnAssignment = getModelMapper().map(newAssignment, Assignment.class);
+            returnAssignment.setCampName(campEntityRepository.getReferenceById(assignmentRequest.getCampId()).getName());
+            return returnAssignment;
+        }
+        return new Assignment();
     }
 
     @Override
@@ -140,6 +146,16 @@ public class EmployeeServiceImpl extends CrudJpaService<EmployeeEntity, Integer>
             return getModelMapper().map(ae, Assignment.class);
         return null;
 
+    }
+
+    @Override
+    public List<Assignment> currentAssignments(Integer id) {
+        List<AssignmentEntity> assignmentEntityList = assignmentEntityRepository.getAllByEmployeeId(id);
+        List<Assignment> assignments = new ArrayList<>();
+        for(AssignmentEntity assignmentEntity : assignmentEntityList) {
+            assignments.add(getModelMapper().map(assignmentEntity, Assignment.class));
+        }
+        return assignments;
     }
 
     @Override

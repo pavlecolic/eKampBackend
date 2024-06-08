@@ -17,6 +17,7 @@ public interface EmployeeService extends CrudService<Integer> {
 
     Assignment changeAssignment(Integer id, ChangeAssignmentRequest assignmentRequest);
     Assignment currentAssignment(Integer id);
+    List<Assignment> currentAssignments(Integer id);
 
     List<UserMessages> getUserMessages(Integer id);
     void setReadMessage(Integer employeeId, Integer messageId);
