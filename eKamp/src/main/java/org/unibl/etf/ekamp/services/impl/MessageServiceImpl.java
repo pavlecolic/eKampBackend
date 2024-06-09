@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.unibl.etf.ekamp.base.CrudJpaService;
 import org.unibl.etf.ekamp.model.dto.Employee;
 import org.unibl.etf.ekamp.model.dto.Message;
+import org.unibl.etf.ekamp.model.dto.UserMessages;
 import org.unibl.etf.ekamp.model.entities.EmployeeEntity;
 import org.unibl.etf.ekamp.model.entities.MessageEntity;
 import org.unibl.etf.ekamp.model.entities.UserMessagesEntity;
@@ -20,7 +21,9 @@ import org.unibl.etf.ekamp.services.MessageService;
 import java.sql.Timestamp;
 import java.time.Instant;
 import java.time.LocalDateTime;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -68,5 +71,14 @@ public class MessageServiceImpl extends CrudJpaService<MessageEntity, Integer> i
             userMessagesRepository.save(userMessagesEntity);
         }
         return getModelMapper().map(messageEntity, Message.class);
+    }
+
+    @Override
+    public List<Message> findAllSorted() {
+        List<MessageEntity> messages = getRepository().findAll();
+        return messages.stream()
+                .map(messageEntity -> getModelMapper().map(messageEntity, Message.class))
+                .sorted(Comparator.comparing(Message::getCreationTime).reversed())
+                .collect(Collectors.toList());
     }
 }
