@@ -1,0 +1,4 @@
+ocistiti bazu od podataka, autoinkremente na 0, najbolje drop sema pa ispocetka
+redom po datumu dodavanja generisati sve
+osobe - 1 - 20 -- employee, 1 je admin
+	21 - 1000 --residenti

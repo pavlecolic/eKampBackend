@@ -88,21 +88,11 @@
       "methods": [],
       "pattern": "/employees/**",
       "roles": [
-        "ADMIN"
-      ]
-    },
-    {
-      "methods": ["GET"],
-      "pattern": "/employees/**",
-      "roles": [
+        "ADMIN",
         "VOLUNTEER"
       ]
     },
-    {
-      "methods": ["GET", "POST"],
-      "pattern": "/employees/*/messages",
-      "roles": ["ADMIN", "VOLUNTEER"]
-    },
+
 
 
     {
@@ -170,7 +160,7 @@
     },
     {
       "methods": [],
-      "pattern": "/residents/**",
+      "pattern": "/residents",
       "roles": [
         "ADMIN",
         "VOLUNTEER"

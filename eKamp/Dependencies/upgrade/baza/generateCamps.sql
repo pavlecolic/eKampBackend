@@ -1,0 +1,22 @@
+-- Generisanje 20 kampova
+INSERT INTO `eKamp`.`camp` (`name`, `place_id`, `camp_status_id`, `capacity`) VALUES
+('Kamp 1', 1, 1, 50),
+('Kamp 2', 2, 2, 30),
+('Kamp 3', 3, 1, 40),
+('Kamp 4', 4, 3, 60),
+('Kamp 5', 5, 2, 45),
+('Kamp 6', 6, 1, 55),
+('Kamp 7', 7, 4, 35),
+('Kamp 8', 8, 1, 50),
+('Kamp 9', 9, 3, 40),
+('Kamp 10', 10, 1, 30),
+('Kamp 11', 11, 2, 50),
+('Kamp 12', 12, 1, 45),
+('Kamp 13', 13, 3, 55),
+('Kamp 14', 14, 4, 35),
+('Kamp 15', 15, 1, 40),
+('Kamp 16', 16, 2, 30),
+('Kamp 17', 17, 1, 50),
+('Kamp 18', 18, 3, 45),
+('Kamp 19', 19, 1, 55),
+('Kamp 20', 20, 4, 35);
