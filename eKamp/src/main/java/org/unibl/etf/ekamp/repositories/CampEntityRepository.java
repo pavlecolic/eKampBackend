@@ -4,7 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.unibl.etf.ekamp.model.entities.CampEntity;
-import org.unibl.etf.ekamp.model.entities.CampStatusEntity;
 import org.unibl.etf.ekamp.model.entities.ResidentEntity;
 
 import java.util.List;

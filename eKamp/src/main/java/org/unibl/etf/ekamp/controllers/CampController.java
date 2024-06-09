@@ -1,8 +1,5 @@
 package org.unibl.etf.ekamp.controllers;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 import org.unibl.etf.ekamp.base.CrudController;
 import org.unibl.etf.ekamp.model.dto.Camp;
