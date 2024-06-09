@@ -7,9 +7,18 @@
         "ADMIN",
         "VOLUNTEER"
       ]
-    },{
-      "methods": [
-      ],
+    },
+    {
+      "methods": [],
+      "pattern": "/assignments/**",
+      "roles": [
+        "ADMIN",
+        "VOLUNTEER"
+      ]
+    },
+
+    {
+      "methods": [],
       "pattern": "/camps",
       "roles": [
         "ADMIN",
@@ -21,23 +30,12 @@
       "pattern": "/camps/**",
       "roles": [
         "ADMIN",
+        "VOLUNTEER"
+      ]
+    },
 
-        "VOLUNTEER"
-      ]
-    },
     {
-      "methods": [
-        "GET"
-      ],
-      "pattern": "/camps",
-      "roles": [
-        "VOLUNTEER"
-      ]
-    },
-    {
-      "methods": [
-        "GET"
-      ],
+      "methods": [],
       "pattern": "/camp-statuses",
       "roles": [
         "ADMIN",
@@ -45,40 +43,23 @@
       ]
     },
     {
-      "methods": [
-        "GET"
-      ],
+      "methods": [],
       "pattern": "/municipalities",
       "roles": [
         "ADMIN",
         "VOLUNTEER"
       ]
     },
-    {
-      "methods": [
-        "GET"
-      ],
-      "pattern": "/municipalities/**",
-      "roles": [
-        "VOLUNTEER"
-      ]
-    },
 
     {
-      "methods": [
-      ],
+      "methods": [],
       "pattern": "/municipalities/**",
       "roles": [
         "ADMIN"
       ]
     },
     {
-      "methods": [
-        "GET",
-        "POST",
-        "PUT",
-        "DELETE"
-      ],
+      "methods": [],
       "pattern": "/employees",
       "roles": [
         "ADMIN"

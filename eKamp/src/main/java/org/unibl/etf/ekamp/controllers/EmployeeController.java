@@ -19,7 +19,7 @@ import java.util.List;
 @RequestMapping("/employees")
 public class EmployeeController {
 
-    EmployeeService service;
+    private final EmployeeService service;
 
     public EmployeeController(EmployeeService service) {
         this.service = service;
@@ -53,6 +53,9 @@ public class EmployeeController {
 
     @PostMapping
     public Employee signUp(@Valid @RequestBody EmployeeRequest request, Authentication authentication) {
+        JwtEmployee jwtEmployee = (JwtEmployee) authentication.getPrincipal();
+        if (jwtEmployee.getRole() != Role.ADMIN)
+            throw new ForbiddenException();
         return service.signUp(request);
     }
 
