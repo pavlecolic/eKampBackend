@@ -8,4 +8,5 @@ import java.util.List;
 
 public interface AssignmentEntityRepository  extends JpaRepository<AssignmentEntity, Integer> {
     List<AssignmentEntity> getAllByEmployeeId(Integer id);
+    List<AssignmentEntity> getAllByEndDateIsNullAndCampId(Integer id);
 }

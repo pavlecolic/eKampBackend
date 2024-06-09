@@ -13,4 +13,7 @@ public interface CampEntityRepository extends JpaRepository<CampEntity, Integer>
 
     @Query("SELECT DISTINCT r FROM ResidencePeriodEntity rp JOIN rp.resident r WHERE rp.camp.id = :id AND rp.endDate IS NULL")
     List<ResidentEntity> findResidentsWithNullEndDate(@Param("id") Integer id);
+
+    @Query("SELECT DISTINCT r FROM ResidencePeriodEntity rp JOIN rp.resident r WHERE rp.camp.id = :id")
+    List<ResidentEntity> findResidentsToEverStayInCampWithId(@Param("id") Integer id);
 }

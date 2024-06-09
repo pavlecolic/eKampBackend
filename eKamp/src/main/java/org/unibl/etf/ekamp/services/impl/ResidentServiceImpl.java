@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.unibl.etf.ekamp.base.CrudJpaService;
+import org.unibl.etf.ekamp.exceptions.ForbiddenException;
 import org.unibl.etf.ekamp.model.dto.Resident;
 import org.unibl.etf.ekamp.model.dto.SimpleResidencePeriod;
 import org.unibl.etf.ekamp.model.entities.AssignmentEntity;
@@ -53,6 +54,9 @@ public class ResidentServiceImpl extends CrudJpaService<ResidentEntity, Integer>
         ResidentEntity entity = getModelMapper().map(request, ResidentEntity.class);
         entity.setId(null);
         AssignmentEntity assignmentEntity = employeeEntityRepository.getCurrentAssignment(request.getEmployeeId());
+        if(assignmentEntity == null || !"AKTIVAN".equalsIgnoreCase(assignmentEntity.getCamp().getCampStatus().getName())) {
+            throw new ForbiddenException();
+        }
         SimpleResidencePeriod simpleResidencePeriod = new SimpleResidencePeriod();
         simpleResidencePeriod.setCampId(assignmentEntity.getCamp().getId());
         simpleResidencePeriod.setStartDate(Timestamp.from(Instant.now()));
@@ -63,8 +67,6 @@ public class ResidentServiceImpl extends CrudJpaService<ResidentEntity, Integer>
         simpleResidencePeriod.setResidentId(entity.getId());
         SimpleResidencePeriod srp = residencePeriodService.insert(getModelMapper().map(simpleResidencePeriod, ResidencePeriodEntity.class), SimpleResidencePeriod.class);
         return getModelMapper().map(entity, Resident.class);
-
-
     }
 
     @Override

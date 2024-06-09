@@ -7,8 +7,10 @@ import org.unibl.etf.ekamp.base.CrudJpaService;
 import org.unibl.etf.ekamp.model.dto.*;
 import org.unibl.etf.ekamp.model.entities.*;
 import org.unibl.etf.ekamp.model.requests.CampStatusRequest;
+import org.unibl.etf.ekamp.repositories.AssignmentEntityRepository;
 import org.unibl.etf.ekamp.repositories.CampEntityRepository;
 import org.unibl.etf.ekamp.repositories.CampStatusRepository;
+import org.unibl.etf.ekamp.repositories.EmployeeEntityRepository;
 import org.unibl.etf.ekamp.services.CampService;
 
 import java.util.ArrayList;
@@ -20,10 +22,14 @@ import java.util.Optional;
 public class CampServiceImpl extends CrudJpaService<CampEntity, Integer> implements CampService {
     private final CampEntityRepository campEntityRepository;
     private final CampStatusRepository campStatusEntityRepository;
-    public CampServiceImpl(CampEntityRepository repository, ModelMapper modelMapper, CampStatusRepository campStatusEntityRepository) {
+    private final AssignmentEntityRepository assignmentEntityRepository;
+    private final EmployeeEntityRepository employeeEntityRepo;
+    public CampServiceImpl(CampEntityRepository repository, ModelMapper modelMapper, CampStatusRepository campStatusEntityRepository, AssignmentEntityRepository assignmentEntityRepository, EmployeeEntityRepository employeeEntityRepo) {
         super(repository, CampEntity.class, modelMapper);
         this.campEntityRepository = repository;
         this.campStatusEntityRepository = campStatusEntityRepository;
+        this.assignmentEntityRepository = assignmentEntityRepository;
+        this.employeeEntityRepo = employeeEntityRepo;
     }
 
     @Override
@@ -67,10 +73,31 @@ public class CampServiceImpl extends CrudJpaService<CampEntity, Integer> impleme
     }
 
     @Override
+    public List<Resident> getAllCampResidentsEver(Integer id) {
+        List<ResidentEntity> residentEntities = campEntityRepository.findResidentsToEverStayInCampWithId(id);
+        List<Resident> residents = new ArrayList<>();
+        for(ResidentEntity residentEntity : residentEntities) {
+            residents.add(getModelMapper().map(residentEntity, Resident.class));
+        }
+        return residents;
+    }
+
+    @Override
     public void changeCampStatus(Integer id, CampStatusRequest request) {
         CampEntity entity = findEntityById(id);
         CampStatusEntity campStatusEntity = campStatusEntityRepository.findCampStatusEntityByName(request.getName());
         entity.setCampStatus(campStatusEntity);
         campEntityRepository.saveAndFlush(entity);
+    }
+
+    @Override
+    public List<Employee> getAllVolunteers(Integer id) {
+        List<AssignmentEntity> allByEndDateIsNullAndCampId = assignmentEntityRepository.getAllByEndDateIsNullAndCampId(id);
+        List<Employee> response = new ArrayList<>();
+        for(AssignmentEntity assignmentEntity : allByEndDateIsNullAndCampId) {
+            EmployeeEntity employeeEntity = employeeEntityRepo.getReferenceById(assignmentEntity.getEmployee().getId());
+            response.add(getModelMapper().map(employeeEntity, Employee.class));
+        }
+        return response;
     }
 }

@@ -6,6 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 import org.unibl.etf.ekamp.base.CrudController;
 import org.unibl.etf.ekamp.model.dto.Camp;
+import org.unibl.etf.ekamp.model.dto.Employee;
 import org.unibl.etf.ekamp.model.dto.ResidencePeriod;
 import org.unibl.etf.ekamp.model.dto.Resident;
 import org.unibl.etf.ekamp.model.requests.CampRequest;
@@ -50,6 +51,15 @@ public class CampController extends CrudController<Integer, CampRequest, Camp> {
     @GetMapping("{id}/residents")
     public List<Resident> getAllCampResidents(@PathVariable Integer id) {
         return campService.getAllCampResidents(id);
+    }
+
+    @GetMapping("{id}/all-residents")
+    public List<Resident> getAllCampResidentsEver(@PathVariable Integer id) {
+        return campService.getAllCampResidentsEver(id);
+    }
+    @GetMapping("{id}/volunteers")
+    public List<Employee> getAllVolunteers(@PathVariable Integer id) {
+        return campService.getAllVolunteers(id);
     }
 
     /*@CrossOrigin
