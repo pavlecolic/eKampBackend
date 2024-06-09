@@ -29,7 +29,9 @@ import java.sql.Timestamp;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -168,11 +170,10 @@ public class EmployeeServiceImpl extends CrudJpaService<EmployeeEntity, Integer>
     @Override
     public List<UserMessages> getUserMessages(Integer id) {
         List<UserMessagesEntity> userMessagesEntities = userMessagesRepository.getAllByEmployeeId(id);
-        List<UserMessages> returnMessages = new ArrayList<>();
-        for(UserMessagesEntity userMessagesEntity : userMessagesEntities) {
-            returnMessages.add(getModelMapper().map(userMessagesEntity, UserMessages.class));
-        }
-        return returnMessages;
+        return userMessagesEntities.stream()
+                .map(userMessagesEntity -> getModelMapper().map(userMessagesEntity, UserMessages.class))
+                .sorted(Comparator.comparing((UserMessages userMessages) -> userMessages.getMessage().getCreationTime()).reversed())
+                .collect(Collectors.toList());
     }
 
     @Override
